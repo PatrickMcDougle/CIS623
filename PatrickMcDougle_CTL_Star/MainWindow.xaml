@@ -1,0 +1,77 @@
+﻿<Window x:Class="PatrickMcDougle_CTL_Star.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PatrickMcDougle_CTL_Star"
+        mc:Ignorable="d"
+		Background="Black"
+        Title="Patrick McDougle's CTL* Application" Height="720" Width="1280">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="1*" />
+			<ColumnDefinition Width="1*" />
+			<ColumnDefinition Width="1*" />
+			<ColumnDefinition Width="1*" />
+			<ColumnDefinition Width="1*" />
+			<ColumnDefinition Width="1*" />
+			<ColumnDefinition Width="1*" />
+			<ColumnDefinition Width="1*" />
+			<ColumnDefinition Width="1*" />
+			<ColumnDefinition Width="1*" />
+			<ColumnDefinition Width="1*" />
+			<ColumnDefinition Width="1*" />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="1*" />
+			<RowDefinition Height="1*" />
+			<RowDefinition Height="1*" />
+			<RowDefinition Height="1*" />
+			<RowDefinition Height="1*" />
+			<RowDefinition Height="1*" />
+			<RowDefinition Height="1*" />
+			<RowDefinition Height="1*" />
+			<RowDefinition Height="1*" />
+			<RowDefinition Height="1*" />
+			<RowDefinition Height="1*" />
+			<RowDefinition Height="1*" />
+		</Grid.RowDefinitions>
+
+		<!-- States -->
+		<Label Grid.Row="1" Grid.ColumnSpan="2">Number of States:</Label>
+		<TextBox Grid.Column="2" Grid.Row="1" Text="{Binding NumberOfStates}"></TextBox>
+		<Label Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2">States List</Label>
+		<TextBox Grid.Column="5" Grid.Row="1" Text="{Binding StatesListJson, Mode=OneWay}" Grid.ColumnSpan="7" />
+
+		<!-- Edges -->
+		<Label Grid.Row="3" Grid.ColumnSpan="2">Edge Construction:</Label>
+		<ComboBox Name="EdgeStart" Grid.Column="2" Grid.Row="3" ItemsSource="{Binding States}" />
+
+		<Canvas Background="Black" Grid.Column="3" Grid.Row="3">
+			<Polygon
+				Points="20,60 60,60 60,80 90,50 60,20 60,40 20,40 20,60"
+				Stroke="DarkBlue"
+				StrokeThickness="5"
+				Stretch="Fill">
+				<Polygon.Fill>
+					<SolidColorBrush Color="Blue" />
+				</Polygon.Fill>
+				<Polygon.RenderTransform>
+					<TranslateTransform X="15" />
+				</Polygon.RenderTransform>
+			</Polygon>
+		</Canvas>
+		<ComboBox Name="EdgeEnd" Grid.Column="4" Grid.Row="3" ItemsSource="{Binding States}" />
+
+		<!-- State Properties -->
+		<Label Grid.Row="5" Grid.ColumnSpan="2">State Properties:</Label>
+		<ComboBox Grid.Column="2" Grid.Row="5" ItemsSource="{Binding States}" />
+		<TextBox Grid.Column="4" Grid.Row="5"></TextBox>
+
+		<!-- Other -->
+
+		<Button Grid.Column="10" Grid.Row="11">Hello</Button>
+
+		<TextBox TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Grid.Column="10" Grid.Row="10"></TextBox>
+	</Grid>
+</Window>
