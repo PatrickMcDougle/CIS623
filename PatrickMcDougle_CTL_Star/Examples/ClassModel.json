@@ -1,0 +1,53 @@
+﻿{
+	"States": [
+		"s0",
+		"s1",
+		"s2"
+	],
+
+	"Edges": [
+		{
+			"Start": "s0",
+			"Finish": "s1"
+		},
+		{
+			"Start": "s0",
+			"Finish": "s2"
+		},
+		{
+			"Start": "s1",
+			"Finish": "s0"
+		},
+		{
+			"Start": "s1",
+			"Finish": "s2"
+		},
+		{
+			"Start": "s2",
+			"Finish": "s2"
+		}
+	],
+
+	"StateFormulas": [
+		{
+			"State": "s0",
+			"Formulas": [
+				"p",
+				"q"
+			]
+		},
+		{
+			"State": "s1",
+			"Formulas": [
+				"r",
+				"q"
+			]
+		},
+		{
+			"State": "s2",
+			"Formulas": [
+				"r"
+			]
+		}
+	]
+}

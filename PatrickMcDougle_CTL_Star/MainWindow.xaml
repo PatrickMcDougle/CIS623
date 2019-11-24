@@ -7,7 +7,10 @@
         mc:Ignorable="d"
 		Background="Black"
         Title="Patrick McDougle's CTL* Application" Height="720" Width="1280">
+
+
 	<Grid>
+
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="1*" />
 			<ColumnDefinition Width="1*" />
@@ -23,6 +26,7 @@
 			<ColumnDefinition Width="1*" />
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
+			<RowDefinition Height="18" />
 			<RowDefinition Height="1*" />
 			<RowDefinition Height="1*" />
 			<RowDefinition Height="1*" />
@@ -37,17 +41,28 @@
 			<RowDefinition Height="1*" />
 		</Grid.RowDefinitions>
 
+		<Menu Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="12">
+			<MenuItem Header="_File">
+				<MenuItem Header="_Open" Click="MenuItem_Open_Click" />
+				<MenuItem Header="_Save" Click="MenuItem_Save_Click" />
+				<Separator />
+				<MenuItem Header="_Exit" />
+			</MenuItem>
+		</Menu>
+
 		<!-- States -->
-		<Label Grid.Row="1" Grid.ColumnSpan="2">Number of States:</Label>
-		<TextBox Grid.Column="2" Grid.Row="1" Text="{Binding NumberOfStates}"></TextBox>
-		<Label Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2">States List</Label>
-		<TextBox Grid.Column="5" Grid.Row="1" Text="{Binding StatesListJson, Mode=OneWay}" Grid.ColumnSpan="7" />
+		<Label Grid.Row="2" Grid.ColumnSpan="2">States:</Label>
+		<TextBox Grid.Column="2" Grid.Row="2" Text="{Binding StatesListJson, Mode=OneWay}" Grid.ColumnSpan="10" />
 
 		<!-- Edges -->
-		<Label Grid.Row="3" Grid.ColumnSpan="2">Edge Construction:</Label>
-		<ComboBox Name="EdgeStart" Grid.Column="2" Grid.Row="3" ItemsSource="{Binding States}" />
+		<Label Grid.Row="3" Grid.ColumnSpan="2">Edges:</Label>
+		<TextBox Grid.Column="2" Grid.Row="3" Text="{Binding EdgesListJson, Mode=OneWay}" Grid.ColumnSpan="10" />
+		
+		<!-- Formulas -->
+		<Label Grid.Row="4" Grid.ColumnSpan="2">Formulas Per State:</Label>
+		<TextBox Grid.Column="2" Grid.Row="4" Text="{Binding FormulasPerStateListJson, Mode=OneWay}" Grid.ColumnSpan="10" />
 
-		<Canvas Background="Black" Grid.Column="3" Grid.Row="3">
+		<Canvas Name="TheCanvas" Background="Black" Grid.Column="3" Grid.Row="8">
 			<Polygon
 				Points="20,60 60,60 60,80 90,50 60,20 60,40 20,40 20,60"
 				Stroke="DarkBlue"
@@ -61,17 +76,12 @@
 				</Polygon.RenderTransform>
 			</Polygon>
 		</Canvas>
-		<ComboBox Name="EdgeEnd" Grid.Column="4" Grid.Row="3" ItemsSource="{Binding States}" />
 
-		<!-- State Properties -->
-		<Label Grid.Row="5" Grid.ColumnSpan="2">State Properties:</Label>
-		<ComboBox Grid.Column="2" Grid.Row="5" ItemsSource="{Binding States}" />
-		<TextBox Grid.Column="4" Grid.Row="5"></TextBox>
 
 		<!-- Other -->
 
-		<Button Grid.Column="10" Grid.Row="11">Hello</Button>
+		<Button Grid.Column="10" Grid.Row="12">Hello</Button>
 
-		<TextBox TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Grid.Column="10" Grid.Row="10"></TextBox>
+		<TextBox TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Grid.Column="10" Grid.Row="11"></TextBox>
 	</Grid>
 </Window>
