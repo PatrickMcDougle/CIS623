@@ -8,12 +8,13 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>PatrickMcDougle_CTL_Star</RootNamespace>
     <AssemblyName>PatrickMcDougle_CTL_Star</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -58,6 +59,28 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Views\AddEdge.xaml.cs">
+      <DependentUpon>AddEdge.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DelState.xaml.cs">
+      <DependentUpon>DelState.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddState.xaml.cs">
+      <DependentUpon>AddState.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\CtlpViewModel.cs" />
+    <Page Include="Views\AddEdge.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\DelState.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AddState.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -81,7 +104,6 @@
     <Compile Include="Models\CtlpModel.cs" />
     <Compile Include="Models\EdgeModel.cs" />
     <Compile Include="Models\StateFormulasModel.cs" />
-    <Compile Include="ModelViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
 using PatrickMcDougle_CTL_Star.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -83,6 +85,15 @@ namespace PatrickMcDougle_CTL_Star
 			get => (_ctlpModel != null && _ctlpModel.States != null) ? _ctlpModel.States : null;
 		}
 
+		public void AddState(string stateName)
+		{
+			if (!string.IsNullOrWhiteSpace(stateName) && !_ctlpModel.States.Contains(stateName))
+			{
+				_ctlpModel.States.Add(stateName);
+				OnPropertyChange(nameof(StatesListJson));
+			}
+		}
+
 		public string StatesListJson
 		{
 			get
@@ -93,6 +104,31 @@ namespace PatrickMcDougle_CTL_Star
 				}
 
 				return null;
+			}
+		}
+
+		internal void DeleteState(string stateName)
+		{
+			if (!string.IsNullOrWhiteSpace(stateName) && _ctlpModel.States.Contains(stateName))
+			{
+				_ctlpModel.States.Remove(stateName);
+				OnPropertyChange(nameof(StatesListJson));
+			}
+		}
+
+		internal void AddEdge(string start, string finish)
+		{
+			if (!string.IsNullOrWhiteSpace(start) && !string.IsNullOrWhiteSpace(finish))
+			{
+				if (!_ctlpModel.Edges.Any(e => e.Finish.Equals(finish) && e.Start.Equals(start)))
+				{
+					_ctlpModel.Edges.Add(new EdgeModel
+					{
+						Start = start,
+						Finish = finish
+					});
+					OnPropertyChange(nameof(EdgesListJson));
+				}
 			}
 		}
 

@@ -50,17 +50,23 @@
 			</MenuItem>
 		</Menu>
 
+		<!--<TextBox Grid.Column="2" Grid.Row="1" Text="Sample Text" Grid.ColumnSpan="8" />-->
 		<!-- States -->
-		<Label Grid.Row="2" Grid.ColumnSpan="2">States:</Label>
-		<TextBox Grid.Column="2" Grid.Row="2" Text="{Binding StatesListJson, Mode=OneWay}" Grid.ColumnSpan="10" />
+		<Label Grid.Row="2" Grid.ColumnSpan="2" Style="{StaticResource Label}">States:</Label>
+		<TextBox Grid.Column="2" Grid.Row="2" Text="{Binding StatesListJson, Mode=OneWay}" IsReadOnly="True" Grid.ColumnSpan="8" />
+		<Button Grid.Row="2" Grid.Column="10" Click="Button_Add_State_Click">ADD</Button>
+		<Button Grid.Row="2" Grid.Column="11" Click="Button_Del_State_Click">DEL</Button>
 
 		<!-- Edges -->
-		<Label Grid.Row="3" Grid.ColumnSpan="2">Edges:</Label>
-		<TextBox Grid.Column="2" Grid.Row="3" Text="{Binding EdgesListJson, Mode=OneWay}" Grid.ColumnSpan="10" />
+		<Label Grid.Row="3" Grid.ColumnSpan="2" Style="{StaticResource Label}">Edges:</Label>
+		<TextBox Grid.Column="2" Grid.Row="3" Text="{Binding EdgesListJson, Mode=OneWay}" Grid.ColumnSpan="8" />
+		<Button Grid.Row="3" Grid.Column="10" Click="Button_Add_Edge_Click">ADD</Button>
+		<Button Grid.Row="3" Grid.Column="11" Click="Button_Del_Edge_Click">DEL</Button>
+
 		
 		<!-- Formulas -->
-		<Label Grid.Row="4" Grid.ColumnSpan="2">Formulas Per State:</Label>
-		<TextBox Grid.Column="2" Grid.Row="4" Text="{Binding FormulasPerStateListJson, Mode=OneWay}" Grid.ColumnSpan="10" />
+		<Label Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource Label}">Formulas Per State:</Label>
+		<TextBox Grid.Column="2" Grid.Row="4" Text="{Binding FormulasPerStateListJson, Mode=OneWay}" Grid.ColumnSpan="8" />
 
 		<Canvas Name="TheCanvas" Background="Black" Grid.Column="3" Grid.Row="8">
 			<Polygon

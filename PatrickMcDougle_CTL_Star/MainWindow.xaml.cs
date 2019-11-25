@@ -14,10 +14,11 @@ namespace PatrickMcDougle_CTL_Star
 	{
 		private const string _INIT_DIR_ = @"D:\GitHub\CIS623\PatrickMcDougle_CTL_Star\Examples";
 		private readonly JsonFile _jsonFile = new JsonFile();
-		private readonly ModelViewModel _viewModel = new ModelViewModel();
+		private readonly CtlpViewModel _viewModel = new CtlpViewModel();
 
 		public MainWindow()
 		{
+			_viewModel.LoadModel(new CtlpModel());
 			DataContext = _viewModel;
 
 			InitializeComponent();
@@ -74,6 +75,56 @@ namespace PatrickMcDougle_CTL_Star
 
 				_jsonFile.SerializeToFile(_viewModel.GetModel(), path);
 			}
+		}
+
+		private void Button_Add_State_Click(object sender, RoutedEventArgs e)
+		{
+			AddState addState = new AddState();
+			if (addState.ShowDialog() == true)
+			{
+				_viewModel.AddState(addState.StateName.Text);
+			}
+		}
+
+		private void Button_Del_State_Click(object sender, RoutedEventArgs e)
+		{
+			DelState delState = new DelState
+			{
+				DataContext = this.DataContext
+			};
+
+			if (delState.ShowDialog() == true)
+			{
+				_viewModel.DeleteState(delState.StateName.SelectedItem as string);
+			}
+
+		}
+
+		private void Button_Add_Edge_Click(object sender, RoutedEventArgs e)
+		{
+			AddEdge addEdge = new AddEdge()
+			{
+				DataContext = this.DataContext
+			};
+
+			if (addEdge.ShowDialog() == true)
+			{
+				_viewModel.AddEdge(addEdge.EdgeStart.Text, addEdge.EdgeFinish.Text);
+			}
+		}
+
+		private void Button_Del_Edge_Click(object sender, RoutedEventArgs e)
+		{
+			DelState delState = new DelState
+			{
+				DataContext = this.DataContext
+			};
+
+			if (delState.ShowDialog() == true)
+			{
+				_viewModel.DeleteState(delState.StateName.SelectedItem as string);
+			}
+
 		}
 	}
 }
