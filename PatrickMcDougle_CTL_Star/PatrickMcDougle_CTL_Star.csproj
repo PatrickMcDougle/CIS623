@@ -102,8 +102,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\CtlpModel.cs" />
-    <Compile Include="Models\EdgeModel.cs" />
-    <Compile Include="Models\StateFormulasModel.cs" />
+    <Compile Include="Models\BinaryRelationModel.cs" />
+    <Compile Include="Models\LabelingFunctionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

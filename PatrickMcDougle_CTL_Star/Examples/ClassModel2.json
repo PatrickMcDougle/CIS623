@@ -1,5 +1,5 @@
 {
-  "Edges": [
+  "BinaryRelations": [
     {
       "Finish": "s1",
       "Start": "s0"
@@ -21,31 +21,37 @@
       "Start": "s2"
     }
   ],
-  "States": [
-    "s0",
-    "s1",
-    "s2"
-  ],
-  "StateFormulas": [
+  "InitialState": "s0",
+  "LabelingFunctions": [
     {
-      "Formulas": [
+      "Propositions": [
         "p",
         "q"
       ],
       "State": "s0"
     },
     {
-      "Formulas": [
+      "Propositions": [
         "r",
         "q"
       ],
       "State": "s1"
     },
     {
-      "Formulas": [
+      "Propositions": [
         "r"
       ],
       "State": "s2"
     }
+  ],
+  "Propositions": [
+    "p",
+    "r",
+    "q"
+  ],
+  "States": [
+    "s0",
+    "s1",
+    "s2"
   ]
 }

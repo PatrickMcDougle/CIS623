@@ -4,8 +4,10 @@ namespace PatrickMcDougle_CTL_Star.Models
 {
 	public class CtlpModel
 	{
-		public IList<EdgeModel> Edges { get; set; } = new List<EdgeModel>();
-		public IList<StateFormulasModel> StateFormulas { get; set; } = new List<StateFormulasModel>();
+		public IList<BinaryRelationModel> BinaryRelations { get; set; } = new List<BinaryRelationModel>();
+		public string InitialState { get; set; } = "";
+		public IList<LabelingFunctionModel> LabelingFunctions { get; set; } = new List<LabelingFunctionModel>();
+		public IList<string> Propositions { get; set; } = new List<string>();
 		public IList<string> States { get; set; } = new List<string>();
 	}
 }

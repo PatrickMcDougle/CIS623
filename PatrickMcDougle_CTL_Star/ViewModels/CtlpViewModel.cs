@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using PatrickMcDougle_CTL_Star.Models;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -15,86 +14,71 @@ namespace PatrickMcDougle_CTL_Star
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		public string EdgesListJson
-		{
-			get
-			{
-				if (_ctlpModel != null && _ctlpModel.Edges != null)
-				{
-					StringBuilder sb = new StringBuilder();
-					sb.Append("{");
-					foreach (var item in _ctlpModel.Edges)
-					{
-						if (sb.Length > 6)
-						{
-							sb.Append(", ");
-						}
-						sb.Append("[");
-						sb.Append(item.Start);
-						sb.Append("->");
-						sb.Append(item.Finish);
-						sb.Append("]");
-					}
-					sb.Append("}");
-					return sb.ToString();
-				}
-
-				return string.Empty;
-			}
-		}
-
-		public string FormulasPerStateListJson
-		{
-			get
-			{
-				if (_ctlpModel != null && _ctlpModel.StateFormulas != null)
-				{
-					StringBuilder sb = new StringBuilder();
-					sb.Append("{");
-					foreach (var item in _ctlpModel.StateFormulas)
-					{
-						if (sb.Length > 6)
-						{
-							sb.Append(", ");
-						}
-						sb.Append("[");
-						sb.Append(item.State);
-						sb.Append("=>|");
-						sb.Append(string.Join(",", item.Formulas));
-						sb.Append("|]");
-					}
-					sb.Append("}");
-					return sb.ToString();
-				}
-
-				return string.Empty;
-			}
-		}
-
-		public IDictionary<int, IList<int>> ListOfEdges { get; set; } = new Dictionary<int, IList<int>>();
+		public IDictionary<int, IList<int>> BinaryRelations { get; set; } = new Dictionary<int, IList<int>>();
 
 		public int NumberOfStates
 		{
 			get => (_ctlpModel != null && _ctlpModel.States != null) ? _ctlpModel.States.Count : 0;
 		}
 
-		public IDictionary<int, IList<string>> StateProperties { get; set; } = new Dictionary<int, IList<string>>();
+		public IDictionary<int, IList<string>> LabelingFunctions { get; set; } = new Dictionary<int, IList<string>>();
 
 		public IEnumerable<string> States
 		{
 			get => (_ctlpModel != null && _ctlpModel.States != null) ? _ctlpModel.States : null;
 		}
 
-		public void AddState(string stateName)
+		public string WriteBinaryRelations
 		{
-			if (!string.IsNullOrWhiteSpace(stateName) && !_ctlpModel.States.Contains(stateName))
+			get
 			{
-				_ctlpModel.States.Add(stateName);
-				OnPropertyChange(nameof(StatesListJson));
+				if (_ctlpModel != null && _ctlpModel.BinaryRelations != null)
+				{
+					StringBuilder sb = new StringBuilder();
+					foreach (var item in _ctlpModel.BinaryRelations)
+					{
+						if (sb.Length > 3)
+						{
+							sb.Append(",  ");
+						}
+						sb.Append(item.Start);
+						sb.Append("->");
+						sb.Append(item.Finish);
+					}
+					return sb.ToString();
+				}
+
+				return string.Empty;
 			}
 		}
 
-		public string StatesListJson
+		public string WriteLabelingFunctions
+		{
+			get
+			{
+				if (_ctlpModel != null && _ctlpModel.LabelingFunctions != null)
+				{
+					StringBuilder sb = new StringBuilder();
+					foreach (var item in _ctlpModel.LabelingFunctions)
+					{
+						if (sb.Length > 6)
+						{
+							sb.Append(",  ");
+						}
+						sb.Append("L(");
+						sb.Append(item.State);
+						sb.Append(")={");
+						sb.Append(string.Join(",", item.Propositions));
+						sb.Append("}");
+					}
+					return sb.ToString();
+				}
+
+				return string.Empty;
+			}
+		}
+
+		public string WriteStates
 		{
 			get
 			{
@@ -107,12 +91,12 @@ namespace PatrickMcDougle_CTL_Star
 			}
 		}
 
-		internal void DeleteState(string stateName)
+		public void AddState(string stateName)
 		{
-			if (!string.IsNullOrWhiteSpace(stateName) && _ctlpModel.States.Contains(stateName))
+			if (!string.IsNullOrWhiteSpace(stateName) && !_ctlpModel.States.Contains(stateName))
 			{
-				_ctlpModel.States.Remove(stateName);
-				OnPropertyChange(nameof(StatesListJson));
+				_ctlpModel.States.Add(stateName);
+				OnPropertyChange(nameof(WriteStates));
 			}
 		}
 
@@ -120,15 +104,24 @@ namespace PatrickMcDougle_CTL_Star
 		{
 			if (!string.IsNullOrWhiteSpace(start) && !string.IsNullOrWhiteSpace(finish))
 			{
-				if (!_ctlpModel.Edges.Any(e => e.Finish.Equals(finish) && e.Start.Equals(start)))
+				if (!_ctlpModel.BinaryRelations.Any(e => e.Finish.Equals(finish) && e.Start.Equals(start)))
 				{
-					_ctlpModel.Edges.Add(new EdgeModel
+					_ctlpModel.BinaryRelations.Add(new BinaryRelationModel
 					{
 						Start = start,
 						Finish = finish
 					});
-					OnPropertyChange(nameof(EdgesListJson));
+					OnPropertyChange(nameof(WriteBinaryRelations));
 				}
+			}
+		}
+
+		internal void DeleteState(string stateName)
+		{
+			if (!string.IsNullOrWhiteSpace(stateName) && _ctlpModel.States.Contains(stateName))
+			{
+				_ctlpModel.States.Remove(stateName);
+				OnPropertyChange(nameof(WriteStates));
 			}
 		}
 
@@ -142,9 +135,9 @@ namespace PatrickMcDougle_CTL_Star
 			_ctlpModel = ctlpModel;
 
 			OnPropertyChange(nameof(States));
-			OnPropertyChange(nameof(StatesListJson));
-			OnPropertyChange(nameof(EdgesListJson));
-			OnPropertyChange(nameof(FormulasPerStateListJson));
+			OnPropertyChange(nameof(WriteStates));
+			OnPropertyChange(nameof(WriteBinaryRelations));
+			OnPropertyChange(nameof(WriteLabelingFunctions));
 		}
 
 		protected void OnPropertyChange([CallerMemberName] string propertyName = "")

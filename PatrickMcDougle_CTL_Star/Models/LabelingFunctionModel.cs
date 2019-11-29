@@ -2,9 +2,9 @@
 
 namespace PatrickMcDougle_CTL_Star.Models
 {
-	public class StateFormulasModel
+	public class LabelingFunctionModel
 	{
-		public IList<string> Formulas { get; set; } = new List<string>();
+		public IList<string> Propositions { get; set; } = new List<string>();
 		public string State { get; set; } = "";
 	}
 }

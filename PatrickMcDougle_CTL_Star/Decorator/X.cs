@@ -3,7 +3,7 @@
 namespace PatrickMcDougle_CTL_Star.Decorator
 {
 	/// <summary>
-	/// X class is the next state in our model path.
+	/// X (neXt) class is the next state in our model path.
 	/// </summary>
 	public class X : Decorator
 	{

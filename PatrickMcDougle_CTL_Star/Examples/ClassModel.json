@@ -5,7 +5,16 @@
 		"s2"
 	],
 
-	"Edges": [
+	"InitialState" :  "s0",
+
+
+	"Propositions": [
+		"p",
+		"r",
+		"q"
+	],
+
+	"BinaryRelations": [
 		{
 			"Start": "s0",
 			"Finish": "s1"
@@ -28,24 +37,24 @@
 		}
 	],
 
-	"StateFormulas": [
+	"LabelingFunctions": [
 		{
 			"State": "s0",
-			"Formulas": [
+			"Propositions": [
 				"p",
 				"q"
 			]
 		},
 		{
 			"State": "s1",
-			"Formulas": [
+			"Propositions": [
 				"r",
 				"q"
 			]
 		},
 		{
 			"State": "s2",
-			"Formulas": [
+			"Propositions": [
 				"r"
 			]
 		}
