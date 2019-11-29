@@ -3,7 +3,7 @@
 namespace PatrickMcDougle_CTL_Star
 {
 	/// <summary>
-	/// Interaction logic for AddState.xaml
+	///     Interaction logic for AddState.xaml
 	/// </summary>
 	public partial class AddEdge : Window
 	{

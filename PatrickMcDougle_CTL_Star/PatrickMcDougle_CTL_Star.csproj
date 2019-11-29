@@ -61,6 +61,7 @@
     </ApplicationDefinition>
     <Compile Include="Composite\AComponent.cs" />
     <Compile Include="Composite\ILineartimeTemporalLogic.cs" />
+    <Compile Include="Composite\Proposition.cs" />
     <Compile Include="Views\AddEdge.xaml.cs">
       <DependentUpon>AddEdge.xaml</DependentUpon>
     </Compile>

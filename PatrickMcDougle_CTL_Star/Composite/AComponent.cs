@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace PatrickMcDougle_CTL_Star.Composite
+﻿namespace PatrickMcDougle_CTL_Star.Composite
 {
 	public abstract class AComponent
 	{
@@ -13,7 +11,8 @@ namespace PatrickMcDougle_CTL_Star.Composite
 			this.valid = valid;
 		}
 
-		public abstract bool IsPathValid();
 		public abstract string Display();
+
+		public abstract bool IsPathValid();
 	}
 }

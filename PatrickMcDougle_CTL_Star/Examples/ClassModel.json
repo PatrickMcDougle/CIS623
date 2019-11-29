@@ -5,13 +5,22 @@
 		"s2"
 	],
 
-	"InitialState" :  "s0",
-
+	"InitialState": "s0",
 
 	"Propositions": [
 		"p",
 		"r",
 		"q"
+	],
+
+	"Path": [
+		"s0",
+		"s1",
+		"s0",
+		"s1",
+		"s0",
+		"s1",
+		"s2"
 	],
 
 	"BinaryRelations": [

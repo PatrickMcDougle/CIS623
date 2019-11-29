@@ -3,7 +3,7 @@
 namespace PatrickMcDougle_CTL_Star.Composite
 {
 	/// <summary>
-	/// X (neXt) class is the next state in our model path.
+	///     X (neXt) class is the next state in our model path.
 	/// </summary>
 	public class X : AComponent, ILineartimeTemporalLogic
 	{

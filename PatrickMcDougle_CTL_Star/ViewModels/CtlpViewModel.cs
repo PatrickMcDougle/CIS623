@@ -1,10 +1,9 @@
-﻿using Newtonsoft.Json;
-using PatrickMcDougle_CTL_Star.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using PatrickMcDougle_CTL_Star.Models;
 
 namespace PatrickMcDougle_CTL_Star
 {
@@ -16,12 +15,12 @@ namespace PatrickMcDougle_CTL_Star
 
 		public IDictionary<int, IList<int>> BinaryRelations { get; set; } = new Dictionary<int, IList<int>>();
 
+		public IDictionary<int, IList<string>> LabelingFunctions { get; set; } = new Dictionary<int, IList<string>>();
+
 		public int NumberOfStates
 		{
 			get => (_ctlpModel != null && _ctlpModel.States != null) ? _ctlpModel.States.Count : 0;
 		}
-
-		public IDictionary<int, IList<string>> LabelingFunctions { get; set; } = new Dictionary<int, IList<string>>();
 
 		public IEnumerable<string> States
 		{
@@ -78,16 +77,29 @@ namespace PatrickMcDougle_CTL_Star
 			}
 		}
 
+		public string WritePath
+		{
+			get
+			{
+				if (_ctlpModel != null && _ctlpModel.Path != null)
+				{
+					return string.Join("->", _ctlpModel.Path.ToArray());
+				}
+
+				return string.Empty;
+			}
+		}
+
 		public string WriteStates
 		{
 			get
 			{
 				if (_ctlpModel != null && _ctlpModel.States != null)
 				{
-					return JsonConvert.SerializeObject(_ctlpModel.States, Formatting.None);
+					return string.Join(" ", _ctlpModel.States.ToArray());
 				}
 
-				return null;
+				return string.Empty;
 			}
 		}
 
@@ -138,6 +150,7 @@ namespace PatrickMcDougle_CTL_Star
 			OnPropertyChange(nameof(WriteStates));
 			OnPropertyChange(nameof(WriteBinaryRelations));
 			OnPropertyChange(nameof(WriteLabelingFunctions));
+			OnPropertyChange(nameof(WritePath));
 		}
 
 		protected void OnPropertyChange([CallerMemberName] string propertyName = "")

@@ -3,11 +3,11 @@
 namespace PatrickMcDougle_CTL_Star.Composite
 {
 	/// <summary>
-	/// G (Globally) class is that all future state in our model path.
+	///     G (Globally) class is that all future state in our model path.
 	///
-	/// F(phi) === ~G(~phi)
+	///     F(phi) === ~G(~phi)
 	///
-	/// G(phi) === ~F(~phi)
+	///     G(phi) === ~F(~phi)
 	/// </summary>
 	public class G : AComponent, ILineartimeTemporalLogic
 	{
