@@ -59,6 +59,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Composite\AComponent.cs" />
+    <Compile Include="Composite\ILineartimeTemporalLogic.cs" />
     <Compile Include="Views\AddEdge.xaml.cs">
       <DependentUpon>AddEdge.xaml</DependentUpon>
     </Compile>
@@ -89,11 +91,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Decorator\Decorator.cs" />
-    <Compile Include="Decorator\G.cs" />
-    <Compile Include="Decorator\IComponent.cs" />
-    <Compile Include="Decorator\F.cs" />
-    <Compile Include="Decorator\X.cs" />
+    <Compile Include="Composite\G.cs" />
+    <Compile Include="Composite\F.cs" />
+    <Compile Include="Composite\X.cs" />
     <Compile Include="Json\JsonFile.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
