@@ -12,10 +12,6 @@ namespace PatrickMcDougle_CTL_Star
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		private const string _INIT_DIR_ = @"D:\GitHub\CIS623\PatrickMcDougle_CTL_Star\Examples";
-		private readonly JsonFile _jsonFile = new JsonFile();
-		private readonly CtlpViewModel _viewModel = new CtlpViewModel();
-
 		public MainWindow()
 		{
 			_viewModel.LoadModel(new CtlpModel());
@@ -24,17 +20,25 @@ namespace PatrickMcDougle_CTL_Star
 			InitializeComponent();
 		}
 
-		private void Button_Add_Edge_Click(object sender, RoutedEventArgs e)
+		private const string _INIT_DIR_ = @"D:\GitHub\CIS623\PatrickMcDougle_CTL_Star\Examples";
+		private readonly JsonFile _jsonFile = new JsonFile();
+		private readonly CtlpViewModel _viewModel = new CtlpViewModel();
+
+		private void Button_Add_Binary_Relation_Click(object sender, RoutedEventArgs e)
 		{
-			AddEdge addEdge = new AddEdge()
+			AddBinaryRelation addBinaryRelation = new AddBinaryRelation()
 			{
 				DataContext = this.DataContext
 			};
 
-			if (addEdge.ShowDialog() == true)
+			if (addBinaryRelation.ShowDialog() == true)
 			{
-				_viewModel.AddEdge(addEdge.EdgeStart.Text, addEdge.EdgeFinish.Text);
+				_viewModel.AddBinaryRelation(addBinaryRelation.BinaryRelationStart.Text, addBinaryRelation.BinaryRelationFinish.Text);
 			}
+		}
+
+		private void Button_Add_Labeling_Function_Click(object sender, RoutedEventArgs e)
+		{
 		}
 
 		private void Button_Add_State_Click(object sender, RoutedEventArgs e)
@@ -46,17 +50,24 @@ namespace PatrickMcDougle_CTL_Star
 			}
 		}
 
-		private void Button_Del_Edge_Click(object sender, RoutedEventArgs e)
+		private void Button_Del_Binary_Relation_Click(object sender, RoutedEventArgs e)
 		{
-			DelState delState = new DelState
+			DelBinaryRelation delBinaryRelation = new DelBinaryRelation
 			{
 				DataContext = this.DataContext
 			};
 
-			if (delState.ShowDialog() == true)
+			if (delBinaryRelation.ShowDialog() == true)
 			{
-				_viewModel.DeleteState(delState.StateName.SelectedItem as string);
+				_viewModel.DeleteBinaryRelation(
+					delBinaryRelation.BinaryRelationStart.SelectedItem as string,
+					delBinaryRelation.BinaryRelationFinish.SelectedItem as string
+					);
 			}
+		}
+
+		private void Button_Del_Labeling_Function_Click(object sender, RoutedEventArgs e)
+		{
 		}
 
 		private void Button_Del_State_Click(object sender, RoutedEventArgs e)

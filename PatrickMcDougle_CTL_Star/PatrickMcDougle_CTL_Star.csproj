@@ -62,8 +62,11 @@
     <Compile Include="Composite\AComponent.cs" />
     <Compile Include="Composite\ILineartimeTemporalLogic.cs" />
     <Compile Include="Composite\Proposition.cs" />
-    <Compile Include="Views\AddEdge.xaml.cs">
-      <DependentUpon>AddEdge.xaml</DependentUpon>
+    <Compile Include="Views\AddBinaryRelation.xaml.cs">
+      <DependentUpon>AddBinaryRelation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DelBinaryRelation.xaml.cs">
+      <DependentUpon>DelBinaryRelation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DelState.xaml.cs">
       <DependentUpon>DelState.xaml</DependentUpon>
@@ -72,7 +75,11 @@
       <DependentUpon>AddState.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\CtlpViewModel.cs" />
-    <Page Include="Views\AddEdge.xaml">
+    <Page Include="Views\AddBinaryRelation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\DelBinaryRelation.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

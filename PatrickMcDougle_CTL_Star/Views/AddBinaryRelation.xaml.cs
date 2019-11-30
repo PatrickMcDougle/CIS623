@@ -5,9 +5,9 @@ namespace PatrickMcDougle_CTL_Star
 	/// <summary>
 	///     Interaction logic for AddState.xaml
 	/// </summary>
-	public partial class AddEdge : Window
+	public partial class AddBinaryRelation : Window
 	{
-		public AddEdge()
+		public AddBinaryRelation()
 		{
 			InitializeComponent();
 		}
