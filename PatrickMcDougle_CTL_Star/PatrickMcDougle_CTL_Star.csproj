@@ -59,9 +59,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Composite\AComponent.cs" />
-    <Compile Include="Composite\ILineartimeTemporalLogic.cs" />
-    <Compile Include="Composite\Proposition.cs" />
+    <Compile Include="Composite\LTL\ALtlComponent.cs" />
+    <Compile Include="Composite\LTL\ILineartimeTemporalLogic.cs" />
+    <Compile Include="Composite\LTL\Proposition.cs" />
+    <Compile Include="Composite\Model\AModelComponent.cs" />
+    <Compile Include="Composite\Model\StateComposite.cs" />
+    <Compile Include="Factories\ModelFactory.cs" />
     <Compile Include="Views\AddBinaryRelation.xaml.cs">
       <DependentUpon>AddBinaryRelation.xaml</DependentUpon>
     </Compile>
@@ -99,9 +102,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Composite\G.cs" />
-    <Compile Include="Composite\F.cs" />
-    <Compile Include="Composite\X.cs" />
+    <Compile Include="Composite\LTL\G.cs" />
+    <Compile Include="Composite\LTL\F.cs" />
+    <Compile Include="Composite\LTL\X.cs" />
     <Compile Include="Json\JsonFile.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -109,9 +112,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\CtlpModel.cs" />
-    <Compile Include="Models\BinaryRelationModel.cs" />
-    <Compile Include="Models\LabelingFunctionModel.cs" />
+    <Compile Include="Data\CtlpData.cs" />
+    <Compile Include="Data\BinaryRelationData.cs" />
+    <Compile Include="Data\LabelingFunctionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

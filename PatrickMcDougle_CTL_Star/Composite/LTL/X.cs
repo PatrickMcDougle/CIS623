@@ -1,24 +1,22 @@
 ﻿using System;
 
-namespace PatrickMcDougle_CTL_Star.Composite
+namespace PatrickMcDougle_CTL_Star.Composite.LTL
 {
 	/// <summary>
 	///     X (neXt) class is the next state in our model path.
 	/// </summary>
-	public class X : AComponent, ILineartimeTemporalLogic
+	public class X : ALtlComponent, ILineartimeTemporalLogic
 	{
-		private AComponent _componentRight;
-
 		public X() : base("X")
 		{
 		}
 
-		public void AddLeft(AComponent component)
+		public void AddLeft(ALtlComponent component)
 		{
 			throw new NotImplementedException();
 		}
 
-		public void AddRight(AComponent component)
+		public void AddRight(ALtlComponent component)
 		{
 			_componentRight = component;
 		}
@@ -34,9 +32,11 @@ namespace PatrickMcDougle_CTL_Star.Composite
 			throw new NotImplementedException();
 		}
 
-		public void Remove(AComponent component)
+		public void Remove(ALtlComponent component)
 		{
 			throw new NotImplementedException();
 		}
+
+		private ALtlComponent _componentRight;
 	}
 }

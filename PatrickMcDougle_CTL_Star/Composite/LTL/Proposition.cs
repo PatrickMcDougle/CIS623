@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace PatrickMcDougle_CTL_Star.Composite
+namespace PatrickMcDougle_CTL_Star.Composite.LTL
 {
-	internal class Proposition : AComponent
+	internal class Proposition : ALtlComponent
 	{
 		public Proposition(string name, bool valid = true) : base(name, valid)
 		{

@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
-using PatrickMcDougle_CTL_Star.Models;
+using PatrickMcDougle_CTL_Star.Data;
 
 namespace PatrickMcDougle_CTL_Star
 {
@@ -16,25 +16,25 @@ namespace PatrickMcDougle_CTL_Star
 
 		public int NumberOfStates
 		{
-			get => (_ctlpModel != null && _ctlpModel.States != null) ? _ctlpModel.States.Count : 0;
+			get => (_ctlpData != null && _ctlpData.States != null) ? _ctlpData.States.Count : 0;
 		}
 
 		public IEnumerable<string> States
 		{
-			get => (_ctlpModel != null && _ctlpModel.States != null) ? _ctlpModel.States : null;
+			get => (_ctlpData != null && _ctlpData.States != null) ? _ctlpData.States : null;
 		}
 
 		public IEnumerable<string> StatesBinaryRelationFinish
 		{
 			get
 			{
-				if (_ctlpModel != null && _ctlpModel.States != null && _ctlpModel.States.Any())
+				if (_ctlpData != null && _ctlpData.States != null && _ctlpData.States.Any())
 				{
-					if (_ctlpModel.BinaryRelations != null && _ctlpModel.BinaryRelations.Any() && !string.IsNullOrWhiteSpace(_stateBinaryRelationStart))
+					if (_ctlpData.BinaryRelations != null && _ctlpData.BinaryRelations.Any() && !string.IsNullOrWhiteSpace(_stateBinaryRelationStart))
 					{
-						return _ctlpModel.BinaryRelations.Where(x => x.Start.Equals(_stateBinaryRelationStart)).Select(y => y.Finish).Distinct();
+						return _ctlpData.BinaryRelations.Where(x => x.Start.Equals(_stateBinaryRelationStart)).Select(y => y.Finish).Distinct();
 					}
-					return _ctlpModel.BinaryRelations.Select(y => y.Finish).Distinct();
+					return _ctlpData.BinaryRelations.Select(y => y.Finish).Distinct();
 				}
 				return _empltyStringList;
 			}
@@ -52,13 +52,13 @@ namespace PatrickMcDougle_CTL_Star
 		{
 			get
 			{
-				if (_ctlpModel != null && _ctlpModel.States != null && _ctlpModel.States.Any())
+				if (_ctlpData != null && _ctlpData.States != null && _ctlpData.States.Any())
 				{
-					if (_ctlpModel.BinaryRelations != null && _ctlpModel.BinaryRelations.Any() && !string.IsNullOrWhiteSpace(_stateBinaryRelationFinish))
+					if (_ctlpData.BinaryRelations != null && _ctlpData.BinaryRelations.Any() && !string.IsNullOrWhiteSpace(_stateBinaryRelationFinish))
 					{
-						return _ctlpModel.BinaryRelations.Where(x => x.Finish.Equals(_stateBinaryRelationFinish)).Select(y => y.Start).Distinct();
+						return _ctlpData.BinaryRelations.Where(x => x.Finish.Equals(_stateBinaryRelationFinish)).Select(y => y.Start).Distinct();
 					}
-					return _ctlpModel.BinaryRelations.Select(y => y.Start).Distinct();
+					return _ctlpData.BinaryRelations.Select(y => y.Start).Distinct();
 				}
 				return _empltyStringList;
 			}
@@ -76,10 +76,10 @@ namespace PatrickMcDougle_CTL_Star
 		{
 			get
 			{
-				if (_ctlpModel != null && _ctlpModel.BinaryRelations != null)
+				if (_ctlpData != null && _ctlpData.BinaryRelations != null)
 				{
 					StringBuilder sb = new StringBuilder();
-					foreach (var item in _ctlpModel.BinaryRelations)
+					foreach (var item in _ctlpData.BinaryRelations)
 					{
 						if (sb.Length > 3)
 						{
@@ -100,10 +100,10 @@ namespace PatrickMcDougle_CTL_Star
 		{
 			get
 			{
-				if (_ctlpModel != null && _ctlpModel.LabelingFunctions != null)
+				if (_ctlpData != null && _ctlpData.LabelingFunctions != null)
 				{
 					StringBuilder sb = new StringBuilder();
-					foreach (var item in _ctlpModel.LabelingFunctions)
+					foreach (var item in _ctlpData.LabelingFunctions)
 					{
 						if (sb.Length > 6)
 						{
@@ -126,9 +126,9 @@ namespace PatrickMcDougle_CTL_Star
 		{
 			get
 			{
-				if (_ctlpModel != null && _ctlpModel.Path != null)
+				if (_ctlpData != null && _ctlpData.Path != null)
 				{
-					return string.Join("->", _ctlpModel.Path.ToArray());
+					return "\u03C0 = " + string.Join("->", _ctlpData.Path.ToArray());
 				}
 
 				return string.Empty;
@@ -139,11 +139,11 @@ namespace PatrickMcDougle_CTL_Star
 		{
 			get
 			{
-				if (_ctlpModel != null && _ctlpModel.States != null && !string.IsNullOrWhiteSpace(_ctlpModel.InitialState))
+				if (_ctlpData != null && _ctlpData.States != null && !string.IsNullOrWhiteSpace(_ctlpData.InitialState))
 				{
 					return string
-						.Join(" ", _ctlpModel.States.ToArray())
-						.Replace(_ctlpModel.InitialState, _ctlpModel.InitialState + "*");
+						.Join(" ", _ctlpData.States.ToArray())
+						.Replace(_ctlpData.InitialState, _ctlpData.InitialState + "*");
 				}
 
 				return string.Empty;
@@ -154,9 +154,9 @@ namespace PatrickMcDougle_CTL_Star
 		{
 			if (!string.IsNullOrWhiteSpace(start)
 				&& !string.IsNullOrWhiteSpace(finish)
-				&& !_ctlpModel.BinaryRelations.Any(e => e.Finish.Equals(finish) && e.Start.Equals(start)))
+				&& !_ctlpData.BinaryRelations.Any(e => e.Finish.Equals(finish) && e.Start.Equals(start)))
 			{
-				_ctlpModel.BinaryRelations.Add(new BinaryRelationModel
+				_ctlpData.BinaryRelations.Add(new BinaryRelationData
 				{
 					Start = start,
 					Finish = finish
@@ -167,9 +167,9 @@ namespace PatrickMcDougle_CTL_Star
 
 		public void AddState(string stateName)
 		{
-			if (!string.IsNullOrWhiteSpace(stateName) && !_ctlpModel.States.Contains(stateName))
+			if (!string.IsNullOrWhiteSpace(stateName) && !_ctlpData.States.Contains(stateName))
 			{
-				_ctlpModel.States.Add(stateName);
+				_ctlpData.States.Add(stateName);
 				OnPropertyChange(nameof(WriteStates));
 			}
 		}
@@ -177,10 +177,10 @@ namespace PatrickMcDougle_CTL_Star
 		public void DeleteBinaryRelation(string startState, string finishState)
 		{
 			if (!string.IsNullOrWhiteSpace(startState) && !string.IsNullOrWhiteSpace(finishState)
-				&& _ctlpModel.BinaryRelations.Any(x => x.Start.Equals(startState) && x.Finish.Equals(finishState)))
+				&& _ctlpData.BinaryRelations.Any(x => x.Start.Equals(startState) && x.Finish.Equals(finishState)))
 			{
-				var item = _ctlpModel.BinaryRelations.Where(x => x.Start.Equals(startState) && x.Finish.Equals(finishState)).ToArray()[0];
-				_ctlpModel.BinaryRelations.Remove(item);
+				var item = _ctlpData.BinaryRelations.Where(x => x.Start.Equals(startState) && x.Finish.Equals(finishState)).ToArray()[0];
+				_ctlpData.BinaryRelations.Remove(item);
 				_stateBinaryRelationFinish = string.Empty;
 				_stateBinaryRelationStart = string.Empty;
 				OnPropertyChange(nameof(WriteBinaryRelations));
@@ -189,21 +189,21 @@ namespace PatrickMcDougle_CTL_Star
 
 		public void DeleteState(string stateName)
 		{
-			if (!string.IsNullOrWhiteSpace(stateName) && _ctlpModel.States.Contains(stateName))
+			if (!string.IsNullOrWhiteSpace(stateName) && _ctlpData.States.Contains(stateName))
 			{
-				_ctlpModel.States.Remove(stateName);
+				_ctlpData.States.Remove(stateName);
 				OnPropertyChange(nameof(WriteStates));
 			}
 		}
 
 		public object GetModel()
 		{
-			return _ctlpModel;
+			return _ctlpData;
 		}
 
-		public void LoadModel(CtlpModel ctlpModel)
+		public void LoadModel(CtlpData ctlpData)
 		{
-			_ctlpModel = ctlpModel;
+			_ctlpData = ctlpData;
 
 			OnPropertyChange(nameof(States));
 			OnPropertyChange(nameof(WriteStates));
@@ -218,7 +218,7 @@ namespace PatrickMcDougle_CTL_Star
 		}
 
 		private readonly IEnumerable<string> _empltyStringList = new List<string>();
-		private CtlpModel _ctlpModel;
+		private CtlpData _ctlpData;
 		private string _stateBinaryRelationFinish = string.Empty;
 		private string _stateBinaryRelationStart = string.Empty;
 	}

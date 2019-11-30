@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace PatrickMcDougle_CTL_Star.Models
+namespace PatrickMcDougle_CTL_Star.Data
 {
-	public class CtlpModel
+	public class CtlpData
 	{
-		public IList<BinaryRelationModel> BinaryRelations { get; set; } = new List<BinaryRelationModel>();
+		public IList<BinaryRelationData> BinaryRelations { get; set; } = new List<BinaryRelationData>();
 		public string InitialState { get; set; } = "";
-		public IList<LabelingFunctionModel> LabelingFunctions { get; set; } = new List<LabelingFunctionModel>();
+		public IList<LabelingFunctionData> LabelingFunctions { get; set; } = new List<LabelingFunctionData>();
 		public IList<string> Path { get; set; } = new List<string>();
 		public IList<string> Propositions { get; set; } = new List<string>();
 		public IList<string> States { get; set; } = new List<string>();

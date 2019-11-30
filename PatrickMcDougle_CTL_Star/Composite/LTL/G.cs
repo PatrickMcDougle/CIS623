@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PatrickMcDougle_CTL_Star.Composite
+namespace PatrickMcDougle_CTL_Star.Composite.LTL
 {
 	/// <summary>
 	///     G (Globally) class is that all future state in our model path.
@@ -9,20 +9,18 @@ namespace PatrickMcDougle_CTL_Star.Composite
 	///
 	///     G(phi) === ~F(~phi)
 	/// </summary>
-	public class G : AComponent, ILineartimeTemporalLogic
+	public class G : ALtlComponent, ILineartimeTemporalLogic
 	{
-		private AComponent _componentRight;
-
 		public G() : base("G")
 		{
 		}
 
-		public void AddLeft(AComponent component)
+		public void AddLeft(ALtlComponent component)
 		{
 			throw new NotImplementedException();
 		}
 
-		public void AddRight(AComponent component)
+		public void AddRight(ALtlComponent component)
 		{
 			_componentRight = component;
 		}
@@ -38,9 +36,11 @@ namespace PatrickMcDougle_CTL_Star.Composite
 			throw new NotImplementedException();
 		}
 
-		public void Remove(AComponent component)
+		public void Remove(ALtlComponent component)
 		{
 			throw new NotImplementedException();
 		}
+
+		private ALtlComponent _componentRight;
 	}
 }

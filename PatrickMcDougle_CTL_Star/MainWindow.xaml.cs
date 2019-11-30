@@ -1,9 +1,11 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using Microsoft.Win32;
+using PatrickMcDougle_CTL_Star.Data;
+using PatrickMcDougle_CTL_Star.Factories;
 using PatrickMcDougle_CTL_Star.Json;
-using PatrickMcDougle_CTL_Star.Models;
 
 namespace PatrickMcDougle_CTL_Star
 {
@@ -14,7 +16,7 @@ namespace PatrickMcDougle_CTL_Star
 	{
 		public MainWindow()
 		{
-			_viewModel.LoadModel(new CtlpModel());
+			_viewModel.LoadModel(new CtlpData());
 			DataContext = _viewModel;
 
 			InitializeComponent();
@@ -39,6 +41,7 @@ namespace PatrickMcDougle_CTL_Star
 
 		private void Button_Add_Labeling_Function_Click(object sender, RoutedEventArgs e)
 		{
+			// nothing at this time.
 		}
 
 		private void Button_Add_State_Click(object sender, RoutedEventArgs e)
@@ -68,6 +71,7 @@ namespace PatrickMcDougle_CTL_Star
 
 		private void Button_Del_Labeling_Function_Click(object sender, RoutedEventArgs e)
 		{
+			//nothing at this time
 		}
 
 		private void Button_Del_State_Click(object sender, RoutedEventArgs e)
@@ -83,6 +87,27 @@ namespace PatrickMcDougle_CTL_Star
 			}
 		}
 
+		private void DrawStatesOnCanvas(CtlpData ctlpData)
+		{
+			TransformGroup myTransformGroup = new TransformGroup();
+			myTransformGroup.Children.Add(new TranslateTransform()
+			{
+				X = TheCanvas.ActualWidth / 2,
+				Y = TheCanvas.ActualHeight / 2
+			});
+			Ellipse myEllipse = new Ellipse
+			{
+				Width = 50,
+				Height = 50,
+				Fill = Brushes.White,
+				Stroke = Brushes.Black,
+				StrokeThickness = 3,
+				RenderTransform = myTransformGroup
+			};
+
+			TheCanvas.Children.Add(myEllipse);
+		}
+
 		private void MenuItem_Open_Click(object sender, RoutedEventArgs e)
 		{
 			OpenFileDialog openFileDialog = new OpenFileDialog
@@ -94,10 +119,18 @@ namespace PatrickMcDougle_CTL_Star
 			{
 				string path = openFileDialog.FileName;
 
-				var json = _jsonFile.DeserializeFromFile<CtlpModel>(path);
+				var ctlpData = _jsonFile.DeserializeFromFile<CtlpData>(path);
 
-				_viewModel.LoadModel(json);
+				_viewModel.LoadModel(ctlpData);
+
+				ModelFactory modelFactory = new ModelFactory();
+
+				var item = modelFactory.CreateModel(ctlpData);
+				Console.WriteLine(item.Name);
+
+				DrawStatesOnCanvas(ctlpData);
 			}
+
 			PointCollection myPointCollection = new PointCollection
 			{
 				new Point(0, 0),
