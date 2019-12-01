@@ -1,0 +1,67 @@
+{
+  "BinaryRelations": [
+    {
+      "Finish": "s1",
+      "Start": "s0"
+    },
+    {
+      "Finish": "s2",
+      "Start": "s0"
+    },
+    {
+      "Finish": "s0",
+      "Start": "s1"
+    },
+    {
+      "Finish": "s2",
+      "Start": "s1"
+    },
+    {
+      "Finish": "s2",
+      "Start": "s2"
+    }
+  ],
+  "InitialState": "s0",
+  "LabelingFunctions": [
+    {
+      "Propositions": [
+        "p",
+        "q"
+      ],
+      "State": "s0"
+    },
+    {
+      "Propositions": [
+        "r",
+        "q"
+      ],
+      "State": "s1"
+    },
+    {
+      "Propositions": [
+        "r"
+      ],
+      "State": "s2"
+    }
+  ],
+  "Path": [
+    "s0",
+    "s1",
+    "s0",
+    "s1",
+    "s0",
+    "s1",
+    "s2"
+  ],
+  "Propositions": [
+    "p",
+    "r",
+    "q"
+  ],
+  "States": [
+    "s0",
+    "s1",
+    "s2",
+    "s3"
+  ]
+}

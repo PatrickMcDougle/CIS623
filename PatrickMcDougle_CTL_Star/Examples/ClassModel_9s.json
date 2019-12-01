@@ -1,0 +1,159 @@
+﻿{
+	"States": [
+		"s0",
+		"s1",
+		"s2",
+		"s3",
+		"s4",
+		"s5",
+		"s6",
+		"s7",
+		"s8"
+	],
+
+	"InitialState": "s0",
+
+	"Propositions": [
+		"n1",
+		"n2",
+		"t1",
+		"t2",
+		"c1",
+		"c1"
+	],
+
+	"Path": [
+		"s0",
+		"s1",
+		"s0",
+		"s1",
+		"s0",
+		"s1",
+		"s2"
+	],
+
+	"BinaryRelations": [
+		{
+			"Start": "s0",
+			"Finish": "s1"
+		},
+		{
+			"Start": "s0",
+			"Finish": "s5"
+		},
+		{
+			"Start": "s1",
+			"Finish": "s2"
+		},
+		{
+			"Start": "s1",
+			"Finish": "s3"
+		},
+		{
+			"Start": "s2",
+			"Finish": "s0"
+		},
+		{
+			"Start": "s2",
+			"Finish": "s4"
+		},
+		{
+			"Start": "s3",
+			"Finish": "s4"
+		},
+		{
+			"Start": "s4",
+			"Finish": "s5"
+		},
+		{
+			"Start": "s5",
+			"Finish": "s8"
+		},
+		{
+			"Start": "s5",
+			"Finish": "s6"
+		},
+		{
+			"Start": "s8",
+			"Finish": "s7"
+		},
+		{
+			"Start": "s6",
+			"Finish": "s0"
+		},
+		{
+			"Start": "s6",
+			"Finish": "s7"
+		},
+		{
+			"Start": "s7",
+			"Finish": "s1"
+		}
+	],
+
+	"LabelingFunctions": [
+		{
+			"State": "s0",
+			"Propositions": [
+				"n1",
+				"n2"
+			]
+		},
+		{
+			"State": "s1",
+			"Propositions": [
+				"t1",
+				"n2"
+			]
+		},
+		{
+			"State": "s2",
+			"Propositions": [
+				"c1",
+				"n2"
+			]
+		},
+		{
+			"State": "s3",
+			"Propositions": [
+				"t1",
+				"t2"
+			]
+		},
+		{
+			"State": "s4",
+			"Propositions": [
+				"c1",
+				"t2"
+			]
+		},
+		{
+			"State": "s5",
+			"Propositions": [
+				"n1",
+				"t2"
+			]
+		},
+		{
+			"State": "s6",
+			"Propositions": [
+				"n1",
+				"c2"
+			]
+		},
+		{
+			"State": "s7",
+			"Propositions": [
+				"t1",
+				"c2"
+			]
+		},
+		{
+			"State": "s8",
+			"Propositions": [
+				"t1",
+				"t2"
+			]
+		}
+	]
+}

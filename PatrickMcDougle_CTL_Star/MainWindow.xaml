@@ -28,18 +28,17 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="18" />
 			<RowDefinition Height="10" />
-			<RowDefinition Height="50" />
-			<RowDefinition Height="50" />
-			<RowDefinition Height="50" />
-			<RowDefinition Height="50" />
-			<RowDefinition Height="50" />
+			<RowDefinition Height="40" />
+			<RowDefinition Height="40" />
+			<RowDefinition Height="40" />
+			<RowDefinition Height="40" />
+			<RowDefinition Height="10" />
 			<RowDefinition Height="1*" />
 			<RowDefinition Height="1*" />
 			<RowDefinition Height="1*" />
 			<RowDefinition Height="1*" />
 			<RowDefinition Height="1*" />
-			<RowDefinition Height="1*" />
-			<RowDefinition Height="1*" />
+			<RowDefinition Height="10" />
 		</Grid.RowDefinitions>
 
 		<Menu Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="13">
@@ -74,19 +73,24 @@
 		<Label Grid.Row="5" Grid.ColumnSpan="2" Style="{StaticResource Label}" Content="Path:" />
 		<TextBox Grid.Column="2" Grid.Row="5" Text="{Binding WritePath, Mode=OneWay}" Grid.ColumnSpan="8" />
 
-		<Canvas Name="TheCanvas" Background="#111111" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="11" Grid.RowSpan="6">
-			<Polygon
+		<Grid x:Name="canvasGrid" SnapsToDevicePixels="True" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="11" Grid.RowSpan="5">
+
+			<Canvas Name="TheCanvas" SnapsToDevicePixels="True" Background="#111111"
+					Width="{Binding ElementName=canvasGrid, Path=ActualWidth}"
+					Height="{Binding ElementName=canvasGrid, Path=ActualHeight}">
+				<Polygon
 				Points="20,60 60,60 60,80 90,50 60,20 60,40 20,40 20,60"
 				Stroke="DarkBlue"
 				StrokeThickness="5"
 				Stretch="Fill">
-				<Polygon.Fill>
-					<SolidColorBrush Color="Blue" />
-				</Polygon.Fill>
-				<Polygon.RenderTransform>
-					<TranslateTransform X="15" />
-				</Polygon.RenderTransform>
-			</Polygon>
-		</Canvas>
+					<Polygon.Fill>
+						<SolidColorBrush Color="Blue" />
+					</Polygon.Fill>
+					<Polygon.RenderTransform>
+						<TranslateTransform X="15" />
+					</Polygon.RenderTransform>
+				</Polygon>
+			</Canvas>
+		</Grid>
 	</Grid>
 </Window>
