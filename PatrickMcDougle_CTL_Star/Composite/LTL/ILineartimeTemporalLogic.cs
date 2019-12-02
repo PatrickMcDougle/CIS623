@@ -5,7 +5,5 @@
 		void AddLeft(ALtlComponent component);
 
 		void AddRight(ALtlComponent component);
-
-		void Remove(ALtlComponent component);
 	}
 }
