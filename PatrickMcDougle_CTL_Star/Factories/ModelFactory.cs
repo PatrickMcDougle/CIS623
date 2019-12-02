@@ -9,46 +9,61 @@ namespace PatrickMcDougle_CTL_Star.Factories
 	{
 		public StateComposite CreateModel(CtlpData ctlpData)
 		{
-			IList<StateComposite> States = new List<StateComposite>();
+			CreateStates(ctlpData.States);
 
-			// create the states.
-			foreach (var item in ctlpData.States)
+			AddEdges(ctlpData.BinaryRelations);
+
+			AddPropositions(ctlpData.LabelingFunctions);
+
+			// return initial state
+
+			if (!string.IsNullOrWhiteSpace(ctlpData.InitialState) && _states.Any(x => x.Name.Equals(ctlpData.InitialState)))
 			{
-				States.Add(new StateComposite(item));
+				return _states.First(x => x.Name.Equals(ctlpData.InitialState));
 			}
 
-			// add the edges/binary relations
-			foreach (var item in ctlpData.BinaryRelations)
+			if (_states.Count > 0)
 			{
-				var stateStart = States.FirstOrDefault(x => x.Name.Equals(item.Start));
-				var stateFinish = States.FirstOrDefault(x => x.Name.Equals(item.Finish));
+				return _states[0];
+			}
+
+			return null;
+		}
+
+		private readonly IList<StateComposite> _states = new List<StateComposite>();
+
+		private void AddEdges(IList<BinaryRelationData> binaryRelations)
+		{
+			// add the edges/binary relations
+			foreach (var item in binaryRelations)
+			{
+				var stateStart = _states.FirstOrDefault(x => x.Name.Equals(item.Start));
+				var stateFinish = _states.FirstOrDefault(x => x.Name.Equals(item.Finish));
 
 				stateStart.AddEdgeToState(stateFinish);
 			}
+		}
 
+		private void AddPropositions(IList<LabelingFunctionData> labelingFunctions)
+		{
 			// add the propositions
-			foreach (var item in ctlpData.LabelingFunctions)
+			foreach (var item in labelingFunctions)
 			{
-				var state = States.FirstOrDefault(x => x.Name.Equals(item.State));
+				var state = _states.FirstOrDefault(x => x.Name.Equals(item.State));
 				foreach (var prop in item.Propositions)
 				{
 					state.AddProposition(prop);
 				}
 			}
+		}
 
-			// return initial state
-
-			if (!string.IsNullOrWhiteSpace(ctlpData.InitialState) && States.Any(x => x.Name.Equals(ctlpData.InitialState)))
+		private void CreateStates(IList<string> states)
+		{
+			// create the states.
+			foreach (var item in states)
 			{
-				return States.First(x => x.Name.Equals(ctlpData.InitialState));
+				_states.Add(new StateComposite(item));
 			}
-
-			if (States.Count > 0)
-			{
-				return States[0];
-			}
-
-			return null;
 		}
 	}
 }

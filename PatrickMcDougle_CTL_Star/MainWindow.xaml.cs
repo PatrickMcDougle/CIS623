@@ -227,6 +227,15 @@ namespace PatrickMcDougle_CTL_Star
 			}
 		}
 
+		/// <summary>
+		///     Finding the distance between two points. This method uses the
+		///     following formula: ((x2-x1)^2 + (y2-y1)^2)^(1/2)
+		/// </summary>
+		/// <param name="x1">point one's X location</param>
+		/// <param name="y1">point one's Y location</param>
+		/// <param name="x2">point two's X location</param>
+		/// <param name="y2">point two's Y location</param>
+		/// <returns></returns>
 		private double FindDistanceBetweenPoints(double x1, double y1, double x2, double y2)
 		{
 			double dx = x2 - x1;
