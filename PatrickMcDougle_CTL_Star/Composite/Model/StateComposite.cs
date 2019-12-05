@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace PatrickMcDougle_CTL_Star.Composite.Model
 {
@@ -21,6 +22,13 @@ namespace PatrickMcDougle_CTL_Star.Composite.Model
 		public override string Display()
 		{
 			throw new NotImplementedException();
+		}
+
+		public bool DoesPropositionValid(string name) => _propositions != null && _propositions.Contains(name);
+
+		public StateComposite GetNextValidState(string stateName)
+		{
+			return _components.First(x => x.Name.Equals(stateName)) as StateComposite;
 		}
 	}
 }

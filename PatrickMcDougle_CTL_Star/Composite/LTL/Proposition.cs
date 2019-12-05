@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using PatrickMcDougle_CTL_Star.Composite.Model;
 
 namespace PatrickMcDougle_CTL_Star.Composite.LTL
 {
@@ -14,9 +16,9 @@ namespace PatrickMcDougle_CTL_Star.Composite.LTL
 			return name;
 		}
 
-		public override bool IsPathValid()
+		public override bool IsModelAndPathValid(StateComposite stateComposite, IList<string> path)
 		{
-			return valid;
+			return stateComposite.DoesPropositionValid(name);
 		}
 	}
 }

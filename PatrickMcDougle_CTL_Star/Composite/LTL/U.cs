@@ -5,23 +5,19 @@ using PatrickMcDougle_CTL_Star.Composite.Model;
 namespace PatrickMcDougle_CTL_Star.Composite.LTL
 {
 	/// <summary>
-	///     F (Future) class is that there is some future state in our model path.
+	///     U (Until) - left component holds until right component holds
 	///
-	///     F(phi) === ~G(~phi)
-	///
-	///     G(phi) === ~F(~phi)
-	///
-	///     Fp - p holds sometime in the future
+	///     pUq - p holds until q holds
 	/// </summary>
-	public class F : ALtlComponent, ILineartimeTemporalLogic
+	public class U : ALtlComponent, ILineartimeTemporalLogic
 	{
-		public F() : base("F")
+		public U() : base("U")
 		{
 		}
 
 		public void AddLeft(ALtlComponent component)
 		{
-			throw new NotImplementedException();
+			_componentLeft = component;
 		}
 
 		public void AddRight(ALtlComponent component)
@@ -31,8 +27,8 @@ namespace PatrickMcDougle_CTL_Star.Composite.LTL
 
 		public override string Display()
 		{
-			Console.WriteLine("F");
-			return "F";
+			Console.WriteLine("G");
+			return "G";
 		}
 
 		public override bool IsModelAndPathValid(StateComposite stateComposite, IList<string> path)
@@ -40,6 +36,7 @@ namespace PatrickMcDougle_CTL_Star.Composite.LTL
 			throw new NotImplementedException();
 		}
 
+		private ALtlComponent _componentLeft;
 		private ALtlComponent _componentRight;
 	}
 }

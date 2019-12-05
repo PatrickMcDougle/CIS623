@@ -58,13 +58,15 @@
 		<Button Grid.Row="2" Grid.Column="11" Click="Button_Del_State_Click">DEL</Button>
 
 		<!-- Edges -->
-		<Label Grid.Row="3" Grid.ColumnSpan="2" Style="{StaticResource Label}">Binary Relations:</Label>
+		<Label Grid.Row="3" Grid.ColumnSpan="2" Style="{StaticResource Label}">Edges:</Label>
+		<!--<Label Grid.Row="3" Grid.ColumnSpan="2" Style="{StaticResource Label}">Binary Relations:</Label>-->
 		<TextBox Grid.Column="2" Grid.Row="3" Text="{Binding WriteBinaryRelations, Mode=OneWay}" Grid.ColumnSpan="8" />
 		<Button Grid.Row="3" Grid.Column="10" Click="Button_Add_Binary_Relation_Click">ADD</Button>
 		<Button Grid.Row="3" Grid.Column="11" Click="Button_Del_Binary_Relation_Click">DEL</Button>
 
 		<!-- Formulas -->
-		<Label Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource Label}">Labeling Functions:</Label>
+		<Label Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource Label}">Propositions:</Label>
+		<!--<Label Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource Label}">Labeling Functions:</Label>-->
 		<TextBox Grid.Column="2" Grid.Row="4" Text="{Binding WriteLabelingFunctions, Mode=OneWay}" Grid.ColumnSpan="8" />
 		<Button Grid.Row="4" Grid.Column="10" Click="Button_Add_Labeling_Function_Click">ADD</Button>
 		<Button Grid.Row="4" Grid.Column="11" Click="Button_Del_Labeling_Function_Click">DEL</Button>

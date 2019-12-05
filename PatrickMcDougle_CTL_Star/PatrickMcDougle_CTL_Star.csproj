@@ -60,6 +60,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Composite\LTL\ALtlComponent.cs" />
+    <Compile Include="Composite\LTL\U.cs" />
     <Compile Include="Composite\LTL\ILineartimeTemporalLogic.cs" />
     <Compile Include="Composite\LTL\Proposition.cs" />
     <Compile Include="Composite\Model\AModelComponent.cs" />

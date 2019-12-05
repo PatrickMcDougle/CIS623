@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using PatrickMcDougle_CTL_Star.Composite.Model;
 
 namespace PatrickMcDougle_CTL_Star.Composite.LTL
 {
@@ -8,6 +12,8 @@ namespace PatrickMcDougle_CTL_Star.Composite.LTL
 	///     F(phi) === ~G(~phi)
 	///
 	///     G(phi) === ~F(~phi)
+	///
+	///     Gp - p holds globally in the future
 	/// </summary>
 	public class G : ALtlComponent, ILineartimeTemporalLogic
 	{
@@ -27,18 +33,65 @@ namespace PatrickMcDougle_CTL_Star.Composite.LTL
 
 		public override string Display()
 		{
-			Console.WriteLine("G");
-			return "G";
+			StringBuilder sb = new StringBuilder();
+			sb.Append(name);
+			sb.Append("(");
+			sb.Append(_componentRight?.Display());
+			sb.Append(")");
+			Console.WriteLine(sb.ToString());
+			return sb.ToString();
 		}
 
-		public override bool IsPathValid()
+		public override bool IsModelAndPathValid(StateComposite stateComposite, IList<string> path)
 		{
-			throw new NotImplementedException();
-		}
+			if (_componentRight == null)
+			{
+				return false;
+			}
 
-		public void Remove(ALtlComponent component)
-		{
-			throw new NotImplementedException();
+			if (path == null || path.Any())
+			{
+				return false;
+			}
+
+			bool isValid = true;
+			StateComposite state = stateComposite;
+			if (_componentRight is Proposition prop)
+			{
+				foreach (var stateName in path)
+				{
+					isValid &= state.DoesPropositionValid(prop.Display());
+
+					if (!isValid)
+					{
+						// if we find an invalid value (false) then no need to
+						// continue, but just return false.S
+						return false;
+					}
+
+					state = stateComposite.GetNextValidState(stateName);
+
+					if (state == null)
+					{
+						// if state is null than something went wrong. return false.
+						return false;
+					}
+				}
+
+				return isValid;
+			}
+
+			//foreach (var stateName in path)
+			//{
+			//	isValid &= state.
+			//}
+
+			var nextStateComposite =
+			stateComposite.GetNextValidState(path[0]);
+
+			path.RemoveAt(0);
+
+			return _componentRight.IsModelAndPathValid(nextStateComposite, path);
 		}
 
 		private ALtlComponent _componentRight;

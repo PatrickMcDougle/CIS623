@@ -1,4 +1,7 @@
-﻿namespace PatrickMcDougle_CTL_Star.Composite.LTL
+﻿using System.Collections.Generic;
+using PatrickMcDougle_CTL_Star.Composite.Model;
+
+namespace PatrickMcDougle_CTL_Star.Composite.LTL
 {
 	public interface ILineartimeTemporalLogic
 	{
@@ -6,6 +9,8 @@
 
 		void AddRight(ALtlComponent component);
 
-		void Remove(ALtlComponent component);
+		string Display();
+
+		bool IsModelAndPathValid(StateComposite stateComposite, IList<string> path);
 	}
 }
