@@ -59,12 +59,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Composite\CTL\ACtlFormula.cs" />
+    <Compile Include="Composite\CTL\AF.cs" />
+    <Compile Include="Composite\CTL\Implication.cs" />
+    <Compile Include="Composite\CTL\EU.cs" />
+    <Compile Include="Composite\CTL\EX.cs" />
+    <Compile Include="Composite\CTL\Conjunction.cs" />
+    <Compile Include="Composite\CTL\Disjunction.cs" />
     <Compile Include="Composite\LTL\ALtlComponent.cs" />
     <Compile Include="Composite\LTL\U.cs" />
     <Compile Include="Composite\LTL\ILineartimeTemporalLogic.cs" />
-    <Compile Include="Composite\LTL\Proposition.cs" />
+    <Compile Include="Composite\CTL\Proposition.cs" />
     <Compile Include="Composite\Model\AModelComponent.cs" />
     <Compile Include="Composite\Model\StateComposite.cs" />
+    <Compile Include="Data\ModelInformation.cs" />
     <Compile Include="Factories\ModelFactory.cs" />
     <Compile Include="Views\AddBinaryRelation.xaml.cs">
       <DependentUpon>AddBinaryRelation.xaml</DependentUpon>
@@ -143,5 +151,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

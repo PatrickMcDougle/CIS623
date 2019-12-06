@@ -1,0 +1,96 @@
+{
+  "BinaryRelations": [
+    {
+      "Finish": "Sleep",
+      "Start": "Birth"
+    },
+    {
+      "Finish": "Eat",
+      "Start": "Sleep"
+    },
+    {
+      "Finish": "Sleep",
+      "Start": "Sleep"
+    },
+    {
+      "Finish": "Poop",
+      "Start": "Sleep"
+    },
+    {
+      "Finish": "Die",
+      "Start": "Sleep"
+    },
+    {
+      "Finish": "Sleep",
+      "Start": "Eat"
+    },
+    {
+      "Finish": "Poop",
+      "Start": "Eat"
+    },
+    {
+      "Finish": "Eat",
+      "Start": "Eat"
+    },
+    {
+      "Finish": "Eat",
+      "Start": "Poop"
+    },
+    {
+      "Finish": "Sleep",
+      "Start": "Poop"
+    },
+    {
+      "Finish": "Die",
+      "Start": "Die"
+    }
+  ],
+  "InitialState": "Birth",
+  "LabelingFunctions": [
+		{
+			"State": "Birth",
+			"Propositions": [
+				"b"
+			]
+    },
+		{
+			"State": "Sleep",
+			"Propositions": [
+				"s"
+			]
+		},
+		{
+			"State": "Eat",
+			"Propositions": [
+				"e"
+			]
+		},
+		{
+			"State": "Poop",
+			"Propositions": [
+				"p"
+			]
+		},
+		{
+			"State": "Die",
+			"Propositions": [
+				"d"
+			]
+		}
+  ],
+  "Path": [],
+  "Propositions": [
+		"b",
+		"s",
+    "e",
+		"p",
+		"d"
+  ],
+  "States": [
+    "Birth",
+    "Sleep",
+    "Eat",
+    "Poop",
+    "Die"
+  ]
+}

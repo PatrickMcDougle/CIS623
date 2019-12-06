@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using PatrickMcDougle_CTL_Star.Composite.CTL;
 using PatrickMcDougle_CTL_Star.Data;
 
 namespace PatrickMcDougle_CTL_Star
@@ -96,6 +97,58 @@ namespace PatrickMcDougle_CTL_Star
 			}
 		}
 
+		public string WriteCtlFormula
+		{
+			get
+			{
+				Proposition propP = new Proposition("p");
+				Proposition propQ = new Proposition("q");
+				Proposition propR = new Proposition("r");
+
+				Conjunction conj = new Conjunction
+				{
+					CtlFormulaLeft = propP,
+					CtlFormulaRight = propQ
+				};
+
+				Disjunction disj = new Disjunction
+				{
+					CtlFormulaLeft = propQ,
+					CtlFormulaRight = propR
+				};
+
+				Implication impl = new Implication
+				{
+					CtlFormulaLeft = propP,
+					CtlFormulaRight = propR
+				};
+
+				AF af = new AF
+				{
+					CtlFormulaRight = conj
+				};
+
+				EX ex = new EX
+				{
+					CtlFormulaRight = disj
+				};
+
+				Disjunction dis2 = new Disjunction
+				{
+					CtlFormulaLeft = af,
+					CtlFormulaRight = ex
+				};
+
+				EU eu = new EU
+				{
+					CtlFormulaLeft = impl,
+					CtlFormulaRight = dis2
+				};
+
+				return eu.Display();
+			}
+		}
+
 		public string WriteLabelingFunctions
 		{
 			get
@@ -128,6 +181,7 @@ namespace PatrickMcDougle_CTL_Star
 			{
 				if (_ctlpData != null && _ctlpData.Path != null)
 				{
+					// \u03c0 is lowercase PI
 					return "\u03C0 = " + string.Join("->", _ctlpData.Path.ToArray());
 				}
 

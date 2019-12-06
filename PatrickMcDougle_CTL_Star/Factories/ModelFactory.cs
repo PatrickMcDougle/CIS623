@@ -40,7 +40,8 @@ namespace PatrickMcDougle_CTL_Star.Factories
 				var stateStart = _states.FirstOrDefault(x => x.Name.Equals(item.Start));
 				var stateFinish = _states.FirstOrDefault(x => x.Name.Equals(item.Finish));
 
-				stateStart.AddEdgeToState(stateFinish);
+				stateStart.AddEdgeToChildState(stateFinish);
+				stateFinish.AddEdgeToParentState(stateStart);
 			}
 		}
 

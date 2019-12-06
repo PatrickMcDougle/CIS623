@@ -51,6 +51,7 @@
 			"State": "s0",
 			"Propositions": [
 				"p",
+				"R",
 				"q"
 			]
 		},

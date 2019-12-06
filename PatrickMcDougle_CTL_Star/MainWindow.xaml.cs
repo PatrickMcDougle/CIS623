@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -115,12 +116,29 @@ namespace PatrickMcDougle_CTL_Star
 
 		private void DrawStatesOnCanvas(CtlpData ctlpData)
 		{
-			double circleDiamater = (TheCanvas.Height > TheCanvas.Width) ? TheCanvas.Width : TheCanvas.Height;
-			circleDiamater -= _stateCircleDiamater;
+			double smallestSide = (TheCanvas.Height > TheCanvas.Width) ? TheCanvas.Width : TheCanvas.Height;
+			double circleDiamater = smallestSide - _stateCircleDiamater;
 			double circleRadius = circleDiamater * 0.5;
 
 			double canvasVerticleCenter = TheCanvas.Height * 0.5;
 			double canvasHorizontalCenter = TheCanvas.Width * 0.5;
+
+			TransformGroup transformGroup = new TransformGroup();
+			transformGroup.Children.Add(new TranslateTransform()
+			{
+				X = canvasHorizontalCenter - smallestSide * 0.5,
+				Y = canvasVerticleCenter - smallestSide * 0.5
+			});
+
+			Rectangle myBackground = new Rectangle
+			{
+				Width = smallestSide,
+				Height = smallestSide,
+				Fill = Brushes.DarkSlateGray,
+				RenderTransform = transformGroup
+			};
+
+			TheCanvas.Children.Add(myBackground);
 
 			// Background Circle
 			DrawCircleOnCanvas(canvasHorizontalCenter - circleRadius,
@@ -142,6 +160,7 @@ namespace PatrickMcDougle_CTL_Star
 					_stateCircleDiamater,
 					Brushes.Yellow, Brushes.Green, 5);
 
+				// state name
 				TextBlock textBlock = new TextBlock()
 				{
 					Text = item,
@@ -154,6 +173,24 @@ namespace PatrickMcDougle_CTL_Star
 				Canvas.SetTop(textBlock, canvasVerticleCenter + circleDiamater * 0.61 * Math.Sin(angle + 0.15) - 8);
 
 				TheCanvas.Children.Add(textBlock);
+
+				// state propositions
+				if (ctlpData.LabelingFunctions.Any(l => l.State.Equals(item)))
+				{
+					textBlock = new TextBlock()
+					{
+						Text = string.Join(",", ctlpData.LabelingFunctions.First(f => f.State.Equals(item)).Propositions.ToArray()),
+						Foreground = Brushes.Black,
+						Background = Brushes.Wheat,
+						FontSize = 16.0,
+						FontFamily = new FontFamily("Anonymous Pro")
+					};
+
+					Canvas.SetLeft(textBlock, x - textBlock.Text.Count() * 4);
+					Canvas.SetTop(textBlock, y - 8);
+
+					TheCanvas.Children.Add(textBlock);
+				}
 
 				angle += angleDelta;
 			}
@@ -309,26 +346,6 @@ namespace PatrickMcDougle_CTL_Star
 
 				DrawStatesOnCanvas(ctlpData);
 			}
-
-			PointCollection myPointCollection = new PointCollection
-			{
-				new Point(0, 0),
-				new Point(0, 1),
-				new Point(1, 1)
-			};
-
-			Polygon myPolygon = new Polygon
-			{
-				Points = myPointCollection,
-				Fill = Brushes.Blue,
-				Width = 100,
-				Height = 100,
-				Stretch = Stretch.Fill,
-				Stroke = Brushes.Black,
-				StrokeThickness = 2
-			};
-
-			TheCanvas.Children.Add(myPolygon);
 		}
 
 		private void MenuItem_Save_Click(object sender, RoutedEventArgs e)

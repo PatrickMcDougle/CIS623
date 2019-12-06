@@ -54,37 +54,28 @@ namespace PatrickMcDougle_CTL_Star.Composite.LTL
 				return false;
 			}
 
-			bool isValid = true;
-			StateComposite state = stateComposite;
-			if (_componentRight is Proposition prop)
-			{
-				foreach (var stateName in path)
-				{
-					isValid &= state.DoesPropositionValid(prop.Display());
+			//bool isValid = true; //
+			//StateComposite state = stateComposite; //
+			//if (_componentRight is Proposition prop)
+			//{ //
+			//	foreach (var stateName in path)
+			//	{ //
+			//		isValid &= state.IsPropositionValid(prop.Display()); //
 
-					if (!isValid)
-					{
-						// if we find an invalid value (false) then no need to
-						// continue, but just return false.S
-						return false;
-					}
+			// if (!isValid) { // if we find an invalid value (false) then no
+			// need to // continue, but just return false.
 
-					state = stateComposite.GetNextValidState(stateName);
+			// return false; } //
 
-					if (state == null)
-					{
-						// if state is null than something went wrong. return false.
-						return false;
-					}
-				}
+			// state = stateComposite.GetNextValidState(stateName); //
 
-				return isValid;
-			}
+			// if (state = null) { // if state is null than something went //
+			// wrong. return false.
 
-			//foreach (var stateName in path)
-			//{
-			//	isValid &= state.
-			//}
+			// return false; } } //
+
+			//	return isValid; //
+			//} //
 
 			var nextStateComposite =
 			stateComposite.GetNextValidState(path[0]);
