@@ -59,17 +59,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Composite\CTL\ACtlFormula.cs" />
+    <Compile Include="Composite\CTL\Abstracts\ACtlFormula.cs" />
     <Compile Include="Composite\CTL\AF.cs" />
-    <Compile Include="Composite\CTL\Implication.cs" />
+    <Compile Include="Composite\CTL\Leafs\Contradiction.cs" />
+    <Compile Include="Composite\CTL\Leafs\Tautology.cs" />
+    <Compile Include="Composite\CTL\EF.cs" />
+    <Compile Include="Composite\CTL\AU.cs" />
+    <Compile Include="Composite\CTL\AG.cs" />
+    <Compile Include="Composite\CTL\EG.cs" />
+    <Compile Include="Composite\CTL\AX.cs" />
+    <Compile Include="Composite\CTL\Logic\Exclusive.cs" />
+    <Compile Include="Composite\CTL\Negation.cs" />
+    <Compile Include="Composite\CTL\Logic\Implication.cs" />
     <Compile Include="Composite\CTL\EU.cs" />
     <Compile Include="Composite\CTL\EX.cs" />
-    <Compile Include="Composite\CTL\Conjunction.cs" />
-    <Compile Include="Composite\CTL\Disjunction.cs" />
+    <Compile Include="Composite\CTL\Logic\Conjunction.cs" />
+    <Compile Include="Composite\CTL\Logic\Disjunction.cs" />
     <Compile Include="Composite\LTL\ALtlComponent.cs" />
     <Compile Include="Composite\LTL\U.cs" />
     <Compile Include="Composite\LTL\ILineartimeTemporalLogic.cs" />
-    <Compile Include="Composite\CTL\Proposition.cs" />
+    <Compile Include="Composite\CTL\Leafs\Proposition.cs" />
     <Compile Include="Composite\Model\AModelComponent.cs" />
     <Compile Include="Composite\Model\StateComposite.cs" />
     <Compile Include="Data\ModelInformation.cs" />

@@ -7,13 +7,13 @@ using PatrickMcDougle_CTL_Star.Data;
 namespace PatrickMcDougle_CTL_Star.Composite.CTL
 {
 	/// <summary>
-	///     EX phi
+	///     EF phi
 	///     Precondition: phi is an arbotrary CTL Formula
-	///     Postcondition: Returns the set of states satisfying EX phi
+	///     Postcondition: Returns the set of states satisfying EF phi
 	/// </summary>
-	public class EX : ACtlFormula
+	public class EF : ACtlFormula
 	{
-		public EX() : base(nameof(EX))
+		public EF() : base(nameof(EF))
 		{
 		}
 
@@ -31,27 +31,17 @@ namespace PatrickMcDougle_CTL_Star.Composite.CTL
 		public override IList<StateComposite> Satisfies(ModelInformation modelInformation)
 		{
 			/*
-			 * X = SAT phi
-			 * Y = Pre_E(X)
-			 * return Y
+			 * return SAT ⊤ EU phi
 			 * */
-			IList<StateComposite> validPhiStates = CtlFormulaRight.Satisfies(modelInformation);
 
-			IList<StateComposite> validStates = new List<StateComposite>();
-
-			// Y = Pre_E(X)
-			foreach (var phiState in validPhiStates)
+			// ⊤ EU phi
+			EU eu = new EU
 			{
-				foreach (var parentState in phiState.ParentStates)
-				{
-					if (!validStates.Contains(parentState))
-					{
-						validStates.Add(parentState);
-					}
-				}
-			}
+				CtlFormulaLeft = new Tautology(),
+				CtlFormulaRight = this.CtlFormulaRight
+			};
 
-			return validStates;
+			return eu.Satisfies(modelInformation);
 		}
 	}
 }

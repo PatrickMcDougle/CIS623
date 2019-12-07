@@ -15,7 +15,7 @@ namespace PatrickMcDougle_CTL_Star.Composite.CTL
 	/// </summary>
 	public class Implication : ACtlFormula
 	{
-		public Implication() : base(nameof(Disjunction))
+		public Implication() : base("\u2192")
 		{
 		}
 
@@ -24,17 +24,19 @@ namespace PatrickMcDougle_CTL_Star.Composite.CTL
 			StringBuilder sb = new StringBuilder();
 			sb.Append("(");
 			sb.Append(CtlFormulaLeft?.Display());
-			sb.Append(" \u2192 ");  // implication syble, hopefully
+			sb.Append(" ");
+			sb.Append(Name);
+			sb.Append(" ");
 			sb.Append(CtlFormulaRight?.Display());
 			sb.Append(")");
 			Console.WriteLine(sb.ToString());
 			return sb.ToString();
 		}
 
-		public override IList<StateComposite> SAT(ModelInformation modelInformation)
+		public override IList<StateComposite> Satisfies(ModelInformation modelInformation)
 		{
-			IList<StateComposite> validPhiStates = CtlFormulaLeft.SAT(modelInformation);
-			IList<StateComposite> validPsiStates = CtlFormulaRight.SAT(modelInformation);
+			IList<StateComposite> validPhiStates = CtlFormulaLeft.Satisfies(modelInformation);
+			IList<StateComposite> validPsiStates = CtlFormulaRight.Satisfies(modelInformation);
 
 			// (phi → psi) == (-phi || psi)
 			foreach (var phiState in validPhiStates)

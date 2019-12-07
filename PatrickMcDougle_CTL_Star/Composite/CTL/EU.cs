@@ -31,7 +31,7 @@ namespace PatrickMcDougle_CTL_Star.Composite.CTL
 			return sb.ToString();
 		}
 
-		public override IList<StateComposite> SAT(ModelInformation modelInformation)
+		public override IList<StateComposite> Satisfies(ModelInformation modelInformation)
 		{
 			/*
 			 * W = SAT phi
@@ -44,8 +44,8 @@ namespace PatrickMcDougle_CTL_Star.Composite.CTL
 			 * return Y
 			 * */
 
-			IList<StateComposite> validPhiStates = CtlFormulaLeft.SAT(modelInformation);
-			IList<StateComposite> validPsiStates = CtlFormulaRight.SAT(modelInformation);
+			IList<StateComposite> validPhiStates = CtlFormulaLeft.Satisfies(modelInformation);
+			IList<StateComposite> validPsiStates = CtlFormulaRight.Satisfies(modelInformation);
 
 			IList<StateComposite> validStates = new List<StateComposite>();
 

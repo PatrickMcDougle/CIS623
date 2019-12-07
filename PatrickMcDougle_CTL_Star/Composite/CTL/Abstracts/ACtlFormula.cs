@@ -11,7 +11,7 @@ namespace PatrickMcDougle_CTL_Star.Composite.CTL
 
 		public abstract string Display();
 
-		public abstract IList<StateComposite> SAT(ModelInformation modelInformation);
+		public abstract IList<StateComposite> Satisfies(ModelInformation modelInformation);
 
 		protected ACtlFormula(string name)
 		{

@@ -17,13 +17,18 @@ namespace PatrickMcDougle_CTL_Star.Composite.CTL
 			return Name;
 		}
 
-		public override IList<StateComposite> SAT(ModelInformation modelInformation)
+		public override IList<StateComposite> Satisfies(ModelInformation modelInformation)
 		{
 			IList<StateComposite> validStates = new List<StateComposite>();
-			if (modelInformation.CurrentState.IsPropositionValid(Name))
+
+			foreach (StateComposite state in modelInformation.AllStates)
 			{
-				validStates.Add(modelInformation.CurrentState);
+				if (state.IsPropositionValid(Name))
+				{
+					validStates.Add(state);
+				}
 			}
+
 			return validStates;
 		}
 	}

@@ -7,13 +7,15 @@ using PatrickMcDougle_CTL_Star.Data;
 namespace PatrickMcDougle_CTL_Star.Composite.CTL
 {
 	/// <summary>
-	///     EX phi
+	///     ¬phi
 	///     Precondition: phi is an arbotrary CTL Formula
-	///     Postcondition: Returns the set of states satisfying EX phi
+	///     Postcondition: Returns the set of states satisfying ¬phi
+	///
+	///     \u00AC = ¬
 	/// </summary>
-	public class EX : ACtlFormula
+	public class Negation : ACtlFormula
 	{
-		public EX() : base(nameof(EX))
+		public Negation() : base("\u00AC")
 		{
 		}
 
@@ -31,23 +33,18 @@ namespace PatrickMcDougle_CTL_Star.Composite.CTL
 		public override IList<StateComposite> Satisfies(ModelInformation modelInformation)
 		{
 			/*
-			 * X = SAT phi
-			 * Y = Pre_E(X)
-			 * return Y
+			 * return S - SAT(phi)
 			 * */
 			IList<StateComposite> validPhiStates = CtlFormulaRight.Satisfies(modelInformation);
 
 			IList<StateComposite> validStates = new List<StateComposite>();
 
-			// Y = Pre_E(X)
-			foreach (var phiState in validPhiStates)
+			// S - SAT(phi)
+			foreach (var state in modelInformation.AllStates)
 			{
-				foreach (var parentState in phiState.ParentStates)
+				if (!validPhiStates.Contains(state))
 				{
-					if (!validStates.Contains(parentState))
-					{
-						validStates.Add(parentState);
-					}
+					validStates.Add(state);
 				}
 			}
 
