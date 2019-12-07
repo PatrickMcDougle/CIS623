@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
+using PatrickMcDougle_CTL_Star.Composite.Model;
 
 namespace PatrickMcDougle_CTL_Star.Composite.LTL
 {
