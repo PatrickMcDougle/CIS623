@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using PatrickMcDougle_CTL_Star.Composite.Model;
 
 namespace PatrickMcDougle_CTL_Star.Composite.LTL
 {
@@ -31,8 +30,15 @@ namespace PatrickMcDougle_CTL_Star.Composite.LTL
 
 		public override string Display()
 		{
-			Console.WriteLine("F");
-			return "F";
+			StringBuilder sb = new StringBuilder();
+			sb.Append("F(");
+			if (_componentRight != null)
+			{
+				sb.Append(_componentRight.Display());
+			}
+
+			sb.Append(")");
+			return sb.ToString();
 		}
 
 		public override bool IsModelAndPathValid(StateComposite stateComposite, IList<string> path)
