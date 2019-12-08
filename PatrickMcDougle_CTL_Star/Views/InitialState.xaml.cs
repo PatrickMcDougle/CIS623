@@ -5,9 +5,9 @@ namespace PatrickMcDougle_CTL_Star
 	/// <summary>
 	///     Interaction logic for AddState.xaml
 	/// </summary>
-	public partial class DelState : Window
+	public partial class InitialState : Window
 	{
-		public DelState()
+		public InitialState()
 		{
 			InitializeComponent();
 		}
@@ -18,7 +18,7 @@ namespace PatrickMcDougle_CTL_Star
 			this.Close();
 		}
 
-		private void Button_Delete_Click(object sender, RoutedEventArgs e)
+		private void Button_Initial_Click(object sender, RoutedEventArgs e)
 		{
 			this.DialogResult = true;
 			this.Close();

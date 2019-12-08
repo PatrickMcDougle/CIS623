@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PatrickMcDougle_CTL_Star"
         mc:Ignorable="d"
 		Background="Black"
-        Title="Patrick McDougle's CTL* Application" Height="720" Width="1280">
+        Title="Patrick McDougle's CTL Application" Height="720" Width="1280">
 
 	<Grid>
 
@@ -31,8 +31,8 @@
 			<RowDefinition Height="40" />
 			<RowDefinition Height="40" />
 			<RowDefinition Height="40" />
-			<RowDefinition Height="40" />
-			<RowDefinition Height="80" />
+			<RowDefinition Height="50" />
+			<RowDefinition Height="50" />
 			<RowDefinition Height="10" />
 			<RowDefinition Height="1*" />
 			<RowDefinition Height="1*" />
@@ -54,28 +54,34 @@
 		<!--<TextBox Grid.Column="2" Grid.Row="1" Text="Sample Text" Grid.ColumnSpan="8" />-->
 		<!-- States -->
 		<Label Grid.Row="2" Grid.ColumnSpan="2" Style="{StaticResource Label}">States:</Label>
-		<TextBox Grid.Column="2" Grid.Row="2" Text="{Binding WriteStates, Mode=OneWay}" IsReadOnly="True" Grid.ColumnSpan="8" />
-		<Button Grid.Row="2" Grid.Column="10" Click="Button_Add_State_Click">ADD</Button>
-		<Button Grid.Row="2" Grid.Column="11" Click="Button_Del_State_Click">DEL</Button>
+		<TextBox Grid.Column="2" Grid.Row="2" Text="{Binding WriteStates, Mode=OneWay}" IsReadOnly="True" Grid.ColumnSpan="7" />
+		<Button Grid.Row="2" Grid.Column="9" Click="Button_Add_State_Click">ADD</Button>
+		<Button Grid.Row="2" Grid.Column="10" Click="Button_Del_State_Click">DEL</Button>
+		<Button Grid.Row="2" Grid.Column="11" Click="Button_Initial_State_Click" Content="Initial State" Grid.ColumnSpan="2" />
 
 		<!-- Edges -->
 		<Label Grid.Row="3" Grid.ColumnSpan="2" Style="{StaticResource Label}">Edges:</Label>
 		<!--<Label Grid.Row="3" Grid.ColumnSpan="2" Style="{StaticResource Label}">Binary Relations:</Label>-->
-		<TextBox Grid.Column="2" Grid.Row="3" Text="{Binding WriteBinaryRelations, Mode=OneWay}" Grid.ColumnSpan="8" />
-		<Button Grid.Row="3" Grid.Column="10" Click="Button_Add_Binary_Relation_Click">ADD</Button>
-		<Button Grid.Row="3" Grid.Column="11" Click="Button_Del_Binary_Relation_Click">DEL</Button>
+		<TextBox Grid.Column="2" Grid.Row="3" Text="{Binding WriteBinaryRelations, Mode=OneWay}" Grid.ColumnSpan="7" />
+		<Button Grid.Row="3" Grid.Column="9" Click="Button_Add_Binary_Relation_Click">ADD</Button>
+		<Button Grid.Row="3" Grid.Column="10" Click="Button_Del_Binary_Relation_Click">DEL</Button>
 
 		<!-- Formulas -->
 		<Label Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource Label}">Propositions:</Label>
 		<!--<Label Grid.Row="4" Grid.ColumnSpan="2" Style="{StaticResource Label}">Labeling Functions:</Label>-->
-		<TextBox Grid.Column="2" Grid.Row="4" Text="{Binding WriteLabelingFunctions, Mode=OneWay}" Grid.ColumnSpan="8" />
-		<Button Grid.Row="4" Grid.Column="10" Click="Button_Add_Labeling_Function_Click">ADD</Button>
-		<Button Grid.Row="4" Grid.Column="11" Click="Button_Del_Labeling_Function_Click">DEL</Button>
+		<TextBox Grid.Column="2" Grid.Row="4" Text="{Binding WriteLabelingFunctions, Mode=OneWay}" Grid.ColumnSpan="7" />
+		<Button Grid.Row="4" Grid.Column="9" Click="Button_Add_Labeling_Function_Click">ADD</Button>
+		<Button Grid.Row="4" Grid.Column="10" Click="Button_Del_Labeling_Function_Click">DEL</Button>
 
-		<!-- Path -->
-		<Label Grid.Row="5" Grid.ColumnSpan="2" Style="{StaticResource Label}" Content="Path:" />
-		<TextBox Grid.Column="2" Grid.Row="5" Text="{Binding WritePath, Mode=OneWay}" Grid.ColumnSpan="8" />
+		<!-- CTL Formula -->
+		<Label Grid.Row="5" Grid.ColumnSpan="2" Style="{StaticResource Label}">CTL Formula:</Label>
+		<TextBox Grid.Column="2" Grid.Row="5" Text="{Binding WriteCtlFormula, Mode=OneWay}" Grid.ColumnSpan="7" />
+		<Label Grid.Row="6" Grid.ColumnSpan="2" Style="{StaticResource Label}">Valid States:</Label>
+		<TextBox Grid.Column="2" Grid.Row="6" Text="{Binding WriteCtlStates, Mode=OneWay}" Grid.ColumnSpan="3" />
+		<Label Grid.Row="6" Grid.Column="6" Style="{StaticResource Label}" Content="M,s0 ⊨" />
+		<TextBox Grid.Column="7" Grid.Row="6" Text="{Binding WriteCtlTruth, Mode=OneWay}" Grid.ColumnSpan="2" />
 
+		<!-- The grid canvas area to do fun graphics stuff -->
 		<Grid x:Name="canvasGrid" SnapsToDevicePixels="True" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="11" Grid.RowSpan="5">
 
 			<Canvas Name="TheCanvas" SnapsToDevicePixels="True" Background="#111111"
@@ -83,6 +89,5 @@
 					Height="{Binding ElementName=canvasGrid, Path=ActualHeight}">
 			</Canvas>
 		</Grid>
-		<TextBox Grid.Column="2" Grid.Row="6" Text="{Binding WriteCtlFormula, Mode=OneWay}" Grid.ColumnSpan="8" />
 	</Grid>
 </Window>

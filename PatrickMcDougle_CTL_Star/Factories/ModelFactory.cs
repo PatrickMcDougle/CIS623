@@ -7,8 +7,9 @@ namespace PatrickMcDougle_CTL_Star.Factories
 {
 	public class ModelFactory
 	{
-		public StateComposite CreateModel(CtlpData ctlpData)
+		public ModelInformation CreateModel(CtlpData ctlpData)
 		{
+			ModelInformation modelInformation = new ModelInformation();
 			CreateStates(ctlpData.States);
 
 			AddEdges(ctlpData.BinaryRelations);
@@ -17,17 +18,17 @@ namespace PatrickMcDougle_CTL_Star.Factories
 
 			// return initial state
 
-			if (!string.IsNullOrWhiteSpace(ctlpData.InitialState) && _states.Any(x => x.Name.Equals(ctlpData.InitialState)))
-			{
-				return _states.First(x => x.Name.Equals(ctlpData.InitialState));
-			}
-
 			if (_states.Count > 0)
 			{
-				return _states[0];
+				modelInformation.AllStates = _states;
+
+				if (!string.IsNullOrWhiteSpace(ctlpData.InitialState) && _states.Any(x => x.Name.Equals(ctlpData.InitialState)))
+				{
+					modelInformation.CurrentState = _states.First(x => x.Name.Equals(ctlpData.InitialState));
+				}
 			}
 
-			return null;
+			return modelInformation;
 		}
 
 		private readonly IList<StateComposite> _states = new List<StateComposite>();

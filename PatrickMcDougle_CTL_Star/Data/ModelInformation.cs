@@ -5,9 +5,7 @@ namespace PatrickMcDougle_CTL_Star.Data
 {
 	public class ModelInformation
 	{
-		public IList<StateComposite> AllStates { get => _allStates; }
-		public StateComposite CurrentState { get; internal set; }
-
-		private readonly IList<StateComposite> _allStates = new List<StateComposite>();
+		public IList<StateComposite> AllStates { get; set; }
+		public StateComposite CurrentState { get; set; }
 	}
 }

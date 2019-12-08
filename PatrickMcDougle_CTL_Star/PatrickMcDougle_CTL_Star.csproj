@@ -69,7 +69,7 @@
     <Compile Include="Composite\CTL\EG.cs" />
     <Compile Include="Composite\CTL\AX.cs" />
     <Compile Include="Composite\CTL\Logic\Exclusive.cs" />
-    <Compile Include="Composite\CTL\Negation.cs" />
+    <Compile Include="Composite\CTL\Logic\Negation.cs" />
     <Compile Include="Composite\CTL\Logic\Implication.cs" />
     <Compile Include="Composite\CTL\EU.cs" />
     <Compile Include="Composite\CTL\EX.cs" />
@@ -89,6 +89,9 @@
     <Compile Include="Views\DelBinaryRelation.xaml.cs">
       <DependentUpon>DelBinaryRelation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\InitialState.xaml.cs">
+      <DependentUpon>InitialState.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DelState.xaml.cs">
       <DependentUpon>DelState.xaml</DependentUpon>
     </Compile>
@@ -101,6 +104,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\DelBinaryRelation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\InitialState.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

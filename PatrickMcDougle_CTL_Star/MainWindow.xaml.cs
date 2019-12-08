@@ -25,7 +25,7 @@ namespace PatrickMcDougle_CTL_Star
 		}
 
 		private const string _INIT_DIR_ = @"D:\GitHub\CIS623\PatrickMcDougle_CTL_Star\Examples";
-		private const int _stateCircleDiamater = 80;
+		private const int _STATECIRCLEDIAMATER = 80;
 		private readonly JsonFile _jsonFile = new JsonFile();
 		private readonly CtlpViewModel _viewModel = new CtlpViewModel();
 
@@ -39,12 +39,14 @@ namespace PatrickMcDougle_CTL_Star
 			if (addBinaryRelation.ShowDialog() == true)
 			{
 				_viewModel.AddBinaryRelation(addBinaryRelation.BinaryRelationStart.Text, addBinaryRelation.BinaryRelationFinish.Text);
+				DrawStatesOnCanvas(_viewModel.Model);
 			}
 		}
 
 		private void Button_Add_Labeling_Function_Click(object sender, RoutedEventArgs e)
 		{
 			// nothing at this time.
+			DrawStatesOnCanvas(_viewModel.Model);
 		}
 
 		private void Button_Add_State_Click(object sender, RoutedEventArgs e)
@@ -53,6 +55,7 @@ namespace PatrickMcDougle_CTL_Star
 			if (addState.ShowDialog() == true)
 			{
 				_viewModel.AddState(addState.StateName.Text);
+				DrawStatesOnCanvas(_viewModel.Model);
 			}
 		}
 
@@ -69,12 +72,14 @@ namespace PatrickMcDougle_CTL_Star
 					delBinaryRelation.BinaryRelationStart.SelectedItem as string,
 					delBinaryRelation.BinaryRelationFinish.SelectedItem as string
 					);
+				DrawStatesOnCanvas(_viewModel.Model);
 			}
 		}
 
 		private void Button_Del_Labeling_Function_Click(object sender, RoutedEventArgs e)
 		{
 			//nothing at this time
+			DrawStatesOnCanvas(_viewModel.Model);
 		}
 
 		private void Button_Del_State_Click(object sender, RoutedEventArgs e)
@@ -87,6 +92,21 @@ namespace PatrickMcDougle_CTL_Star
 			if (delState.ShowDialog() == true)
 			{
 				_viewModel.DeleteState(delState.StateName.SelectedItem as string);
+				DrawStatesOnCanvas(_viewModel.Model);
+			}
+		}
+
+		private void Button_Initial_State_Click(object sender, RoutedEventArgs e)
+		{
+			InitialState initialState = new InitialState
+			{
+				DataContext = this.DataContext
+			};
+
+			if (initialState.ShowDialog() == true)
+			{
+				_viewModel.InitialState(initialState.StateName.SelectedItem as string);
+				DrawStatesOnCanvas(_viewModel.Model);
 			}
 		}
 
@@ -117,25 +137,37 @@ namespace PatrickMcDougle_CTL_Star
 		private void DrawStatesOnCanvas(CtlpData ctlpData)
 		{
 			double smallestSide = (TheCanvas.Height > TheCanvas.Width) ? TheCanvas.Width : TheCanvas.Height;
-			double circleDiamater = smallestSide - _stateCircleDiamater;
+			double circleDiamater = smallestSide - _STATECIRCLEDIAMATER;
 			double circleRadius = circleDiamater * 0.5;
 
 			double canvasVerticleCenter = TheCanvas.Height * 0.5;
 			double canvasHorizontalCenter = TheCanvas.Width * 0.5;
 
-			TransformGroup transformGroup = new TransformGroup();
-			transformGroup.Children.Add(new TranslateTransform()
-			{
-				X = canvasHorizontalCenter - smallestSide * 0.5,
-				Y = canvasVerticleCenter - smallestSide * 0.5
-			});
+			// calculate each state circle radius and diamater
+			var _stateCircleDiamater = Math.PI * circleDiamater;
 
+			if (ctlpData.States.Any())
+			{
+				if (ctlpData.States.Count > 10)
+				{
+					_stateCircleDiamater = _stateCircleDiamater * 0.75;
+				}
+				else
+				{
+					_stateCircleDiamater = _stateCircleDiamater * (20.0 + (5.5 * ctlpData.States.Count)) * 0.01;
+				}
+
+				_stateCircleDiamater = _stateCircleDiamater / ctlpData.States.Count;
+			}
+
+			var _stateCircleRadius = _stateCircleDiamater * 0.5;
+
+			// Draw a rectangle to cover the canvas.
 			Rectangle myBackground = new Rectangle
 			{
-				Width = smallestSide,
-				Height = smallestSide,
-				Fill = Brushes.DarkSlateGray,
-				RenderTransform = transformGroup
+				Width = TheCanvas.Width,
+				Height = TheCanvas.Height,
+				Fill = new SolidColorBrush(Color.FromRgb(10, 10, 10))
 			};
 
 			TheCanvas.Children.Add(myBackground);
@@ -155,8 +187,8 @@ namespace PatrickMcDougle_CTL_Star
 				var x = canvasHorizontalCenter + circleRadius * Math.Cos(angle);
 				var y = canvasVerticleCenter + circleRadius * Math.Sin(angle);
 
-				DrawCircleOnCanvas(x - _stateCircleDiamater * 0.5,
-					y - _stateCircleDiamater * 0.5,
+				DrawCircleOnCanvas(x - _stateCircleRadius,
+					y - _stateCircleRadius,
 					_stateCircleDiamater,
 					Brushes.Yellow, Brushes.Green, 5);
 
@@ -195,6 +227,7 @@ namespace PatrickMcDougle_CTL_Star
 				angle += angleDelta;
 			}
 
+			// Draw connecting lines between states.
 			foreach (var item in ctlpData.BinaryRelations)
 			{
 				var startIndex = ctlpData.States.IndexOf(item.Start);
@@ -206,60 +239,69 @@ namespace PatrickMcDougle_CTL_Star
 					// between them.
 
 					// first calculate the line from center to center.
-					Line line = new Line
+					Line lineBase = new Line
 					{
 						X1 = canvasHorizontalCenter + circleRadius * Math.Cos(angleDelta * startIndex),
 						Y1 = canvasVerticleCenter + circleRadius * Math.Sin(angleDelta * startIndex),
 						X2 = canvasHorizontalCenter + circleRadius * Math.Cos(angleDelta * finishIndex),
 						Y2 = canvasVerticleCenter + circleRadius * Math.Sin(angleDelta * finishIndex),
-						Stroke = Brushes.Black,
-						StrokeThickness = 3
+						Stroke = Brushes.White,
+						StrokeThickness = 7
 					};
 
 					// Remove part of the line so that the line is coming from
 					// the edge of the circle.
-					if (FindLineCircleIntersections(line.X1, line.Y1, _stateCircleDiamater * 0.5, line.X1, line.Y1, line.X2, line.Y2, out double x1, out double y1, out double x2, out double y2))
+					if (FindLineCircleIntersections(lineBase.X1, lineBase.Y1, _stateCircleRadius, lineBase.X1, lineBase.Y1, lineBase.X2, lineBase.Y2, out double x1, out double y1, out double x2, out double y2))
 					{
-						double d1 = FindDistanceBetweenPoints(x1, y1, line.X2, line.Y2);
-						double d2 = FindDistanceBetweenPoints(x2, y2, line.X2, line.Y2);
+						double d1 = FindDistanceBetweenPoints(x1, y1, lineBase.X2, lineBase.Y2);
+						double d2 = FindDistanceBetweenPoints(x2, y2, lineBase.X2, lineBase.Y2);
 						if (d1 < d2)
 						{
-							line.X1 = x1;
-							line.Y1 = y1;
+							lineBase.X1 = x1;
+							lineBase.Y1 = y1;
 						}
 						else
 						{
-							line.X1 = x2;
-							line.Y1 = y2;
+							lineBase.X1 = x2;
+							lineBase.Y1 = y2;
 						}
 					}
 
 					// remove the other end of the line so that the line is at
 					// the edge of the circle.
-					if (FindLineCircleIntersections(line.X2, line.Y2, _stateCircleDiamater * 0.5, line.X1, line.Y1, line.X2, line.Y2, out x1, out y1, out x2, out y2))
+					if (FindLineCircleIntersections(lineBase.X2, lineBase.Y2, _stateCircleRadius, lineBase.X1, lineBase.Y1, lineBase.X2, lineBase.Y2, out x1, out y1, out x2, out y2))
 					{
-						double d1 = FindDistanceBetweenPoints(x1, y1, line.X1, line.Y1);
-						double d2 = FindDistanceBetweenPoints(x2, y2, line.X1, line.Y1);
+						double d1 = FindDistanceBetweenPoints(x1, y1, lineBase.X1, lineBase.Y1);
+						double d2 = FindDistanceBetweenPoints(x2, y2, lineBase.X1, lineBase.Y1);
 						if (d1 < d2)
 						{
-							line.X2 = x1;
-							line.Y2 = y1;
+							lineBase.X2 = x1;
+							lineBase.Y2 = y1;
 						}
 						else
 						{
-							line.X2 = x2;
-							line.Y2 = y2;
+							lineBase.X2 = x2;
+							lineBase.Y2 = y2;
 						}
 					}
 
-					TheCanvas.Children.Add(line);
+					TheCanvas.Children.Add(lineBase);
+					TheCanvas.Children.Add(new Line
+					{
+						X1 = lineBase.X1,
+						Y1 = lineBase.Y1,
+						X2 = lineBase.X2,
+						Y2 = lineBase.Y2,
+						Stroke = Brushes.Black,
+						StrokeThickness = 3
+					});
 
 					// draw a circle at the end of the finish to denote that it
 					// is traveling in that direction.
-					DrawCircleOnCanvas(line.X2 - 5,
-						line.Y2 - 5,
-						10,
-						Brushes.Black, Brushes.Black, 1);
+					DrawCircleOnCanvas(lineBase.X2 - 7,
+						lineBase.Y2 - 7,
+						14,
+						Brushes.Black, Brushes.White, 2);
 				}
 			}
 		}
@@ -341,8 +383,7 @@ namespace PatrickMcDougle_CTL_Star
 
 				ModelFactory modelFactory = new ModelFactory();
 
-				var item = modelFactory.CreateModel(ctlpData);
-				Console.WriteLine(item.Name);
+				_viewModel.LoadModelInfo(modelFactory.CreateModel(ctlpData));
 
 				DrawStatesOnCanvas(ctlpData);
 			}
@@ -359,7 +400,7 @@ namespace PatrickMcDougle_CTL_Star
 			{
 				string path = saveFileDialog.FileName;
 
-				_jsonFile.SerializeToFile(_viewModel.GetModel(), path);
+				_jsonFile.SerializeToFile(_viewModel.Model, path);
 			}
 		}
 	}

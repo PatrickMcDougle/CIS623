@@ -1,96 +1,115 @@
 {
-  "BinaryRelations": [
-    {
-      "Finish": "Sleep",
-      "Start": "Birth"
-    },
-    {
-      "Finish": "Eat",
-      "Start": "Sleep"
-    },
-    {
-      "Finish": "Sleep",
-      "Start": "Sleep"
-    },
-    {
-      "Finish": "Poop",
-      "Start": "Sleep"
-    },
-    {
-      "Finish": "Die",
-      "Start": "Sleep"
-    },
-    {
-      "Finish": "Sleep",
-      "Start": "Eat"
-    },
-    {
-      "Finish": "Poop",
-      "Start": "Eat"
-    },
-    {
-      "Finish": "Eat",
-      "Start": "Eat"
-    },
-    {
-      "Finish": "Eat",
-      "Start": "Poop"
-    },
-    {
-      "Finish": "Sleep",
-      "Start": "Poop"
-    },
-    {
-      "Finish": "Die",
-      "Start": "Die"
-    }
-  ],
-  "InitialState": "Birth",
-  "LabelingFunctions": [
+	"BinaryRelations": [
 		{
-			"State": "Birth",
-			"Propositions": [
-				"b"
-			]
-    },
+			"Finish": "Ss",
+			"Start": "Sb"
+		},
 		{
-			"State": "Sleep",
+			"Finish": "Se",
+			"Start": "Ss"
+		},
+		{
+			"Finish": "Ss",
+			"Start": "Ss"
+		},
+		{
+			"Finish": "Sp",
+			"Start": "Ss"
+		},
+		{
+			"Finish": "Sd",
+			"Start": "Ss"
+		},
+		{
+			"Finish": "Ss",
+			"Start": "Se"
+		},
+		{
+			"Finish": "Sp",
+			"Start": "Se"
+		},
+		{
+			"Finish": "Se",
+			"Start": "Se"
+		},
+		{
+			"Finish": "Se",
+			"Start": "Sp"
+		},
+		{
+			"Finish": "Ss",
+			"Start": "Sp"
+		},
+		{
+			"Finish": "Sd",
+			"Start": "Sd"
+		}
+	],
+	"InitialState": "Sb",
+	"LabelingFunctions": [
+		{
+			"State": "Sb",
 			"Propositions": [
-				"s"
+				"b",
+				"i",
+				"r",
+				"t",
+				"h"
 			]
 		},
 		{
-			"State": "Eat",
+			"State": "Ss",
 			"Propositions": [
-				"e"
-			]
-		},
-		{
-			"State": "Poop",
-			"Propositions": [
+				"s",
+				"l",
+				"e",
 				"p"
 			]
 		},
 		{
-			"State": "Die",
+			"State": "Se",
 			"Propositions": [
-				"d"
+				"e",
+				"a",
+				"t"
+			]
+		},
+		{
+			"State": "Sp",
+			"Propositions": [
+				"p",
+				"o"
+			]
+		},
+		{
+			"State": "Sd",
+			"Propositions": [
+				"d",
+				"i",
+				"e"
 			]
 		}
-  ],
-  "Path": [],
-  "Propositions": [
+	],
+	"Path": [],
+	"Propositions": [
+		"a",
+		"e",
+		"i",
+		"o",
 		"b",
-		"s",
-    "e",
+		"d",
+		"h",
+		"l",
 		"p",
-		"d"
-  ],
-  "States": [
-    "Birth",
-    "Sleep",
-    "Eat",
-    "Poop",
-    "Die"
-  ]
+		"r",
+		"s",
+		"t"
+	],
+	"States": [
+		"Sb",
+		"Ss",
+		"Se",
+		"Sp",
+		"Sd"
+	]
 }

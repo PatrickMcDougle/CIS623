@@ -21,11 +21,14 @@ namespace PatrickMcDougle_CTL_Star.Composite.CTL
 		{
 			IList<StateComposite> validStates = new List<StateComposite>();
 
-			foreach (StateComposite state in modelInformation.AllStates)
+			if (modelInformation != null)
 			{
-				if (state.IsPropositionValid(Name))
+				foreach (StateComposite state in modelInformation.AllStates)
 				{
-					validStates.Add(state);
+					if (state.IsPropositionValid(Name))
+					{
+						validStates.Add(state);
+					}
 				}
 			}
 
