@@ -45,8 +45,15 @@ namespace PatrickMcDougle_CTL_Star
 
 		private void Button_Add_Labeling_Function_Click(object sender, RoutedEventArgs e)
 		{
-			// nothing at this time.
-			DrawStatesOnCanvas(_viewModel.Model);
+			AddPropositions propositions = new AddPropositions()
+			{
+				DataContext = this.DataContext
+			};
+			if (propositions.ShowDialog() == true)
+			{
+				_viewModel.AddPropositions(propositions.StateName.Text, propositions.ThePropositions.Text);
+				DrawStatesOnCanvas(_viewModel.Model);
+			}
 		}
 
 		private void Button_Add_State_Click(object sender, RoutedEventArgs e)
@@ -78,7 +85,15 @@ namespace PatrickMcDougle_CTL_Star
 
 		private void Button_Del_Labeling_Function_Click(object sender, RoutedEventArgs e)
 		{
-			//nothing at this time
+			DelPropositions propositions = new DelPropositions()
+			{
+				DataContext = this.DataContext
+			};
+			if (propositions.ShowDialog() == true)
+			{
+				_viewModel.DelPropositions(propositions.StateName.Text, propositions.ThePropositions.Text);
+				DrawStatesOnCanvas(_viewModel.Model);
+			}
 			DrawStatesOnCanvas(_viewModel.Model);
 		}
 

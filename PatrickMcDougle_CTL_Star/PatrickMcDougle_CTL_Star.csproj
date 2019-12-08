@@ -86,8 +86,14 @@
     <Compile Include="Views\AddBinaryRelation.xaml.cs">
       <DependentUpon>AddBinaryRelation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\DelPropositions.xaml.cs">
+      <DependentUpon>DelPropositions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DelBinaryRelation.xaml.cs">
       <DependentUpon>DelBinaryRelation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddPropositions.xaml.cs">
+      <DependentUpon>AddPropositions.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\InitialState.xaml.cs">
       <DependentUpon>InitialState.xaml</DependentUpon>
@@ -103,7 +109,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\DelPropositions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\DelBinaryRelation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AddPropositions.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -217,6 +217,25 @@ namespace PatrickMcDougle_CTL_Star
 			}
 		}
 
+		public void AddPropositions(string stateName, string propositionString)
+		{
+			if (Model.LabelingFunctions.Any(l => l.State.Equals(stateName)))
+			{
+				var propList = propositionString.Split(',');
+				var labelFunction = Model.LabelingFunctions.First(x => x.State.Equals(stateName));
+
+				foreach (var prop in propList)
+				{
+					var t = prop.Trim();
+					if (!labelFunction.Propositions.Any(x => x.Equals(t)))
+					{
+						labelFunction.Propositions.Add(t);
+					}
+				}
+				OnPropertyChange(nameof(WriteLabelingFunctions));
+			}
+		}
+
 		public void AddState(string stateName)
 		{
 			if (!string.IsNullOrWhiteSpace(stateName) && !Model.States.Contains(stateName))
@@ -245,6 +264,25 @@ namespace PatrickMcDougle_CTL_Star
 			{
 				Model.States.Remove(stateName);
 				OnPropertyChange(nameof(WriteStates));
+			}
+		}
+
+		public void DelPropositions(string stateName, string propositionString)
+		{
+			if (Model.LabelingFunctions.Any(l => l.State.Equals(stateName)))
+			{
+				var propList = propositionString.Split(',');
+				var labelFunction = Model.LabelingFunctions.First(x => x.State.Equals(stateName));
+
+				foreach (var prop in propList)
+				{
+					var t = prop.Trim();
+					if (labelFunction.Propositions.Any(x => x.Equals(t)))
+					{
+						labelFunction.Propositions.Remove(t);
+					}
+				}
+				OnPropertyChange(nameof(WriteLabelingFunctions));
 			}
 		}
 
