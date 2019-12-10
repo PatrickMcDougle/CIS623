@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using PatrickMcDougle_CTL_Star.Composite.Model;
 using PatrickMcDougle_CTL_Star.Data;
 
@@ -11,9 +10,11 @@ namespace PatrickMcDougle_CTL_Star.Composite.CTL
 		{
 		}
 
+		public override bool IsCtlFormulaLeftUsed { get => false; }
+		public override bool IsCtlFormulaRightUsed { get => false; }
+
 		public override string Display()
 		{
-			Console.Write(Name);
 			return Name;
 		}
 

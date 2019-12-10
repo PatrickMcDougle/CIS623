@@ -78,7 +78,7 @@
 		<TextBox Grid.Column="2" Grid.Row="5" Text="{Binding WriteCtlFormula, Mode=OneWay}" Grid.ColumnSpan="7" />
 		<Label Grid.Row="6" Grid.ColumnSpan="2" Style="{StaticResource Label}">Valid States:</Label>
 		<TextBox Grid.Column="2" Grid.Row="6" Text="{Binding WriteCtlStates, Mode=OneWay}" Grid.ColumnSpan="3" />
-		<Label Grid.Row="6" Grid.Column="6" Style="{StaticResource Label}" Content="M,s0 ⊨" />
+		<Label Grid.Row="6" Grid.Column="6" Style="{StaticResource Label}" Content="{Binding LabelCtlTruth, Mode=OneWay}" />
 		<TextBox Grid.Column="7" Grid.Row="6" Text="{Binding WriteCtlTruth, Mode=OneWay}" Grid.ColumnSpan="2" />
 
 		<!-- The grid canvas area to do fun graphics stuff -->
@@ -89,5 +89,6 @@
 					Height="{Binding ElementName=canvasGrid, Path=ActualHeight}">
 			</Canvas>
 		</Grid>
+		<Button Grid.Row="5" Grid.Column="9" Grid.ColumnSpan="2" Click="Button_Construct_CTL_Click" Content="Construct" />
 	</Grid>
 </Window>

@@ -17,15 +17,18 @@ namespace PatrickMcDougle_CTL_Star.Composite.CTL
 		{
 		}
 
+		public override bool IsCtlFormulaLeftUsed { get => true; }
+		public override bool IsCtlFormulaRightUsed { get => true; }
+
 		public override string Display()
 		{
 			StringBuilder sb = new StringBuilder();
 			sb.Append("[");
-			sb.Append(CtlFormulaLeft?.Display());
+			sb.Append(CtlFormulaLeft == null ? "__" : CtlFormulaLeft.Display());
 			sb.Append(" ");
 			sb.Append(Name);
 			sb.Append(" ");
-			sb.Append(CtlFormulaRight?.Display());
+			sb.Append(CtlFormulaRight == null ? "__" : CtlFormulaRight.Display());
 			sb.Append("]");
 			Console.WriteLine(sb.ToString());
 			return sb.ToString();

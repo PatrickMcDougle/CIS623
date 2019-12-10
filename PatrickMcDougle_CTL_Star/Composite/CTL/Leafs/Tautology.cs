@@ -17,6 +17,9 @@ namespace PatrickMcDougle_CTL_Star.Composite.CTL
 		{
 		}
 
+		public override bool IsCtlFormulaLeftUsed { get => false; }
+		public override bool IsCtlFormulaRightUsed { get => false; }
+
 		public override string Display()
 		{
 			return Name;
@@ -30,9 +33,12 @@ namespace PatrickMcDougle_CTL_Star.Composite.CTL
 
 			IList<StateComposite> validStates = new List<StateComposite>();
 
-			foreach (var state in modelInformation.AllStates)
+			if (modelInformation != null)
 			{
-				validStates.Add(state);
+				foreach (var state in modelInformation.AllStates)
+				{
+					validStates.Add(state);
+				}
 			}
 
 			return validStates;

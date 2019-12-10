@@ -86,6 +86,9 @@
     <Compile Include="Views\AddBinaryRelation.xaml.cs">
       <DependentUpon>AddBinaryRelation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ConstructCTL.xaml.cs">
+      <DependentUpon>ConstructCTL.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DelPropositions.xaml.cs">
       <DependentUpon>DelPropositions.xaml</DependentUpon>
     </Compile>
@@ -108,6 +111,10 @@
     <Page Include="Views\AddBinaryRelation.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ConstructCTL.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DelPropositions.xaml">
       <Generator>MSBuild:Compile</Generator>

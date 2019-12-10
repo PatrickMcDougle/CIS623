@@ -69,6 +69,15 @@
 			<Setter Property="HorizontalContentAlignment" Value="Right" />
 		</Style>
 
+		<Style x:Key="TextBlock" TargetType="TextBlock">
+			<Setter Property="Foreground" Value="White" />
+			<Setter Property="Background" Value="Black" />
+			<Setter Property="FontSize" Value="20" />
+			<Setter Property="VerticalAlignment" Value="Stretch" />
+			<Setter Property="HorizontalAlignment" Value="Stretch" />
+			<Setter Property="TextAlignment" Value="Right" />
+		</Style>
+
 		<Style x:Key="Heading" TargetType="Label">
 			<Setter Property="Foreground" Value="White" />
 			<Setter Property="Background" Value="Black" />

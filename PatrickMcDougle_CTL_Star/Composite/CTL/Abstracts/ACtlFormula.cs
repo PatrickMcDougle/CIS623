@@ -9,6 +9,9 @@ namespace PatrickMcDougle_CTL_Star.Composite.CTL
 		public ACtlFormula CtlFormulaLeft { get; set; }
 		public ACtlFormula CtlFormulaRight { get; set; }
 
+		public abstract bool IsCtlFormulaLeftUsed { get; }
+		public abstract bool IsCtlFormulaRightUsed { get; }
+
 		public abstract string Display();
 
 		public abstract IList<StateComposite> Satisfies(ModelInformation modelInformation);

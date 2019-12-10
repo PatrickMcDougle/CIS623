@@ -66,6 +66,15 @@ namespace PatrickMcDougle_CTL_Star
 			}
 		}
 
+		private void Button_Construct_CTL_Click(object sender, RoutedEventArgs e)
+		{
+			ConstructCTL constructCTL = new ConstructCTL();
+			if (constructCTL.ShowDialog() == true)
+			{
+				_viewModel.AddCtlFormula(constructCTL.ConstructedCtlFormula);
+			}
+		}
+
 		private void Button_Del_Binary_Relation_Click(object sender, RoutedEventArgs e)
 		{
 			DelBinaryRelation delBinaryRelation = new DelBinaryRelation

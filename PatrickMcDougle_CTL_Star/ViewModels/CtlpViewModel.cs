@@ -21,6 +21,19 @@ namespace PatrickMcDougle_CTL_Star
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		public IDictionary<int, IList<int>> BinaryRelations { get; set; } = new Dictionary<int, IList<int>>();
+
+		public string LabelCtlTruth
+		{
+			get
+			{
+				if (!string.IsNullOrWhiteSpace(Model.InitialState))
+				{
+					return $"M,{Model.InitialState} ⊨";
+				}
+				return "M,s0 ⊨";
+			}
+		}
+
 		public IDictionary<int, IList<string>> LabelingFunctions { get; set; } = new Dictionary<int, IList<string>>();
 		public CtlpData Model { get; private set; }
 
@@ -118,11 +131,16 @@ namespace PatrickMcDougle_CTL_Star
 		{
 			get
 			{
-				var a = _aCtlFormula
+				if (_modelInformation != null)
+				{
+					var a = _aCtlFormula
 					.Satisfies(_modelInformation)
 					.Select(s => s.Name)
 					.ToArray();
-				return string.Join(" ", a);
+
+					return string.Join(" ", a);
+				}
+				return string.Empty;
 			}
 		}
 
@@ -130,6 +148,11 @@ namespace PatrickMcDougle_CTL_Star
 		{
 			get
 			{
+				if (_modelInformation == null)
+				{
+					return string.Empty;
+				}
+
 				if (!string.IsNullOrWhiteSpace(Model.InitialState))
 				{
 					return _aCtlFormula
@@ -191,11 +214,9 @@ namespace PatrickMcDougle_CTL_Star
 					{
 						return string.Join(" ", Model.States.ToArray());
 					}
-					else
-					{
-						return string.Join(" ", Model.States.ToArray())
+
+					return string.Join(" ", Model.States.ToArray())
 						.Replace(Model.InitialState, Model.InitialState + "*");
-					}
 				}
 
 				return string.Empty;
@@ -215,6 +236,14 @@ namespace PatrickMcDougle_CTL_Star
 				});
 				OnPropertyChange(nameof(WriteBinaryRelations));
 			}
+		}
+
+		public void AddCtlFormula(ACtlFormula constructedCtlFormula)
+		{
+			_aCtlFormula = constructedCtlFormula;
+			OnPropertyChange(nameof(WriteCtlFormula));
+			OnPropertyChange(nameof(WriteCtlStates));
+			OnPropertyChange(nameof(WriteCtlTruth));
 		}
 
 		public void AddPropositions(string stateName, string propositionString)
@@ -301,6 +330,8 @@ namespace PatrickMcDougle_CTL_Star
 				Model.InitialState = string.Empty;
 			}
 			OnPropertyChange(nameof(WriteStates));
+			OnPropertyChange(nameof(WriteCtlTruth));
+			OnPropertyChange(nameof(LabelCtlTruth));
 		}
 
 		public void LoadModel(CtlpData ctlpData)
@@ -312,14 +343,19 @@ namespace PatrickMcDougle_CTL_Star
 			OnPropertyChange(nameof(WriteBinaryRelations));
 			OnPropertyChange(nameof(WriteLabelingFunctions));
 			OnPropertyChange(nameof(WritePath));
+			OnPropertyChange(nameof(WriteCtlFormula));
+			OnPropertyChange(nameof(WriteCtlStates));
+			OnPropertyChange(nameof(WriteCtlTruth));
+			OnPropertyChange(nameof(LabelCtlTruth));
 		}
 
-		internal void LoadModelInfo(ModelInformation modelInformation)
+		public void LoadModelInfo(ModelInformation modelInformation)
 		{
 			_modelInformation = modelInformation;
 			OnPropertyChange(nameof(WriteCtlFormula));
 			OnPropertyChange(nameof(WriteCtlStates));
 			OnPropertyChange(nameof(WriteCtlTruth));
+			OnPropertyChange(nameof(LabelCtlTruth));
 		}
 
 		protected void OnPropertyChange([CallerMemberName] string propertyName = "")
@@ -327,8 +363,8 @@ namespace PatrickMcDougle_CTL_Star
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 
-		private readonly ACtlFormula _aCtlFormula;
 		private readonly IEnumerable<string> _empltyStringList = new List<string>();
+		private ACtlFormula _aCtlFormula;
 		private ModelInformation _modelInformation;
 		private string _stateBinaryRelationFinish = string.Empty;
 		private string _stateBinaryRelationStart = string.Empty;

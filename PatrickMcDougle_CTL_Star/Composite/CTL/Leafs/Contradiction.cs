@@ -17,6 +17,9 @@ namespace PatrickMcDougle_CTL_Star.Composite.CTL
 		{
 		}
 
+		public override bool IsCtlFormulaLeftUsed { get => false; }
+		public override bool IsCtlFormulaRightUsed { get => false; }
+
 		public override string Display()
 		{
 			return Name;

@@ -1,0 +1,59 @@
+﻿<Window x:Class="PatrickMcDougle_CTL_Star.ConstructCTL"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PatrickMcDougle_CTL_Star"
+        mc:Ignorable="d"
+		Background="Black"
+        Title="ConstructCTL" Height="450" Width="800">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="1*" />
+			<ColumnDefinition Width="1*" />
+			<ColumnDefinition Width="1*" />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="3*" />
+			<RowDefinition Height="3*" />
+			<RowDefinition Height="2*" />
+			<RowDefinition Height="3*" />
+			<RowDefinition Height="3*" />
+			<RowDefinition Height="3*" />
+		</Grid.RowDefinitions>
+
+		<TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Style="{StaticResource TextBlock}" Name="TheCurrentSolution">
+			<Run Name="TheCurrentSolutionP1"></Run>
+			<Run Name="TheCurrentSolutionP2" Background="#555500"></Run>
+			<Run Name="TheCurrentSolutionP3"></Run>
+			<Run Name="TheCurrentSolutionDone" Background="#55FF55" Foreground="#000000"></Run>
+		</TextBlock>
+		<ComboBox Name="TheCtlFormula" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="1" SelectionChanged="TheCtlFormula_SelectionChanged">
+			<Label>Formulas</Label>
+			<ComboBoxItem>AF</ComboBoxItem>
+			<ComboBoxItem>EF</ComboBoxItem>
+			<ComboBoxItem>AG</ComboBoxItem>
+			<ComboBoxItem>EG</ComboBoxItem>
+			<ComboBoxItem>AU</ComboBoxItem>
+			<ComboBoxItem>EU</ComboBoxItem>
+			<ComboBoxItem>AX</ComboBoxItem>
+			<ComboBoxItem>EX</ComboBoxItem>
+			<Label>Logics</Label>
+			<ComboBoxItem>∧ - Conjuncation</ComboBoxItem>
+			<ComboBoxItem>∨ - Disjuncation</ComboBoxItem>
+			<ComboBoxItem>⊕ - Exclusive</ComboBoxItem>
+			<ComboBoxItem>→ - Implication</ComboBoxItem>
+			<ComboBoxItem>¬ - Negation</ComboBoxItem>
+			<Label>Leafs</Label>
+			<ComboBoxItem>⊤ - Tautology</ComboBoxItem>
+			<ComboBoxItem>⊥ - Contradiction</ComboBoxItem>
+			<ComboBoxItem>Proposition</ComboBoxItem>
+		</ComboBox>
+		<TextBox Grid.Column="1" Grid.ColumnSpan="1" Grid.Row="1" Name="TheProposition" />
+		<Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" Name="TheExtraText" Content="*To add Proposition, please provide value in box above"  Style="{StaticResource Label}" />
+
+		<Button Grid.Column="0" Grid.Row="3" Content="ADD" Click="Button_Add_Click" />
+		<Button Grid.Column="1" Grid.Row="3" Content="Complete" Click="Button_Complete_Click" />
+		<Button Grid.Column="2" Grid.Row="3" Content="Cancel" Click="Button_Cancel_Click" />
+	</Grid>
+</Window>

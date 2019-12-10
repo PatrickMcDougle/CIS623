@@ -19,12 +19,15 @@ namespace PatrickMcDougle_CTL_Star.Composite.CTL
 		{
 		}
 
+		public override bool IsCtlFormulaLeftUsed { get => false; }
+		public override bool IsCtlFormulaRightUsed { get => true; }
+
 		public override string Display()
 		{
 			StringBuilder sb = new StringBuilder();
 			sb.Append(Name);
 			sb.Append("(");
-			sb.Append(CtlFormulaRight?.Display());
+			sb.Append(CtlFormulaRight == null ? "__" : CtlFormulaRight.Display());
 			sb.Append(")");
 			Console.WriteLine(sb.ToString());
 			return sb.ToString();
@@ -40,11 +43,14 @@ namespace PatrickMcDougle_CTL_Star.Composite.CTL
 			IList<StateComposite> validStates = new List<StateComposite>();
 
 			// S - SAT(phi)
-			foreach (var state in modelInformation.AllStates)
+			if (modelInformation != null)
 			{
-				if (!validPhiStates.Contains(state))
+				foreach (var state in modelInformation.AllStates)
 				{
-					validStates.Add(state);
+					if (!validPhiStates.Contains(state))
+					{
+						validStates.Add(state);
+					}
 				}
 			}
 
