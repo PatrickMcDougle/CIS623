@@ -49,7 +49,17 @@ namespace PatrickMcDougle_CTL_Star
 		}
 
 		private const string _INIT_DIR_ = @"D:\GitHub\CIS623\PatrickMcDougle_CTL_Star\Examples";
-		private const int _STATECIRCLEDIAMATER = 80;
+
+		/// <summary>
+		///     Close underestimate of what 1/3 is.
+		/// </summary>
+		private const double _ONETHIRDS = 0.3;
+
+		/// <summary>
+		///     Close underestimate of what 2/3 is.
+		/// </summary>
+		private const double _TWOTHIRDS = 0.7;
+
 		private readonly JsonFile _jsonFile = new JsonFile();
 		private readonly CtlpViewModel _viewModel = new CtlpViewModel();
 		private SolidColorBrush[] _backgroundColorBrushes;
@@ -189,27 +199,25 @@ namespace PatrickMcDougle_CTL_Star
 		private void DrawStatesOnCanvas(CtlpData ctlpData)
 		{
 			double smallestSide = (TheCanvas.Height > TheCanvas.Width) ? TheCanvas.Width : TheCanvas.Height;
-			double circleDiamater = smallestSide - _STATECIRCLEDIAMATER;
+			double circleDiamater = smallestSide * _TWOTHIRDS;
 			double circleRadius = circleDiamater * 0.5;
 
 			double canvasVerticleCenter = TheCanvas.Height * 0.5;
 			double canvasHorizontalCenter = TheCanvas.Width * 0.5;
 
 			// calculate each state circle radius and diamater
-			var _stateCircleDiamater = Math.PI * circleDiamater;
+			var _stateCircleDiamater = smallestSide * _ONETHIRDS;
 
 			if (ctlpData.States.Any())
 			{
 				if (ctlpData.States.Count > 10)
 				{
-					_stateCircleDiamater = _stateCircleDiamater * 0.75;
+					_stateCircleDiamater *= 0.5;
 				}
 				else
 				{
-					_stateCircleDiamater = _stateCircleDiamater * (20.0 + (5.5 * ctlpData.States.Count)) * 0.01;
+					_stateCircleDiamater *= (1.0 - (0.05 * ctlpData.States.Count));
 				}
-
-				_stateCircleDiamater = _stateCircleDiamater / ctlpData.States.Count;
 			}
 
 			var _stateCircleRadius = _stateCircleDiamater * 0.5;
