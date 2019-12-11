@@ -178,6 +178,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Examples\ClassModel.json" />
     <None Include="Examples\ClassModel_9s.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

@@ -22,12 +22,40 @@ namespace PatrickMcDougle_CTL_Star
 			DataContext = _viewModel;
 
 			InitializeComponent();
+
+			_stateCircleColorBrushes = new SolidColorBrush[4]
+			{
+				new SolidColorBrush(Color.FromRgb(230, 230, 0)),
+				new SolidColorBrush(Color.FromRgb(20, 130, 230)),
+				new SolidColorBrush(Color.FromRgb(120, 120, 10)),
+				new SolidColorBrush(Color.FromRgb(120, 10, 10))
+			};
+			_stateTextColorBrushes = new SolidColorBrush[2]
+			{
+				new SolidColorBrush(Color.FromRgb(30, 30, 90)), // foreground
+				new SolidColorBrush(Color.FromRgb(160, 230, 10)) // background
+			};
+			_edgeLineColorBrushes = new SolidColorBrush[2]
+			{
+				new SolidColorBrush(Color.FromRgb(10, 10, 10)), // black-ish
+				new SolidColorBrush(Color.FromRgb(245, 245, 245)) // white-ish
+			};
+			_backgroundColorBrushes = new SolidColorBrush[3]
+			{
+				new SolidColorBrush(Color.FromRgb(10, 10, 10)),
+				new SolidColorBrush(Color.FromRgb(20, 20, 20)),
+				new SolidColorBrush(Color.FromRgb(30, 30, 30))
+			};
 		}
 
 		private const string _INIT_DIR_ = @"D:\GitHub\CIS623\PatrickMcDougle_CTL_Star\Examples";
 		private const int _STATECIRCLEDIAMATER = 80;
 		private readonly JsonFile _jsonFile = new JsonFile();
 		private readonly CtlpViewModel _viewModel = new CtlpViewModel();
+		private SolidColorBrush[] _backgroundColorBrushes;
+		private SolidColorBrush[] _edgeLineColorBrushes;
+		private SolidColorBrush[] _stateCircleColorBrushes;
+		private SolidColorBrush[] _stateTextColorBrushes;
 
 		private void Button_Add_Binary_Relation_Click(object sender, RoutedEventArgs e)
 		{
@@ -129,7 +157,7 @@ namespace PatrickMcDougle_CTL_Star
 
 			if (initialState.ShowDialog() == true)
 			{
-				_viewModel.InitialState(initialState.StateName.SelectedItem as string);
+				_viewModel.UpdateInitialState(initialState.StateName.SelectedItem as string);
 				DrawStatesOnCanvas(_viewModel.Model);
 			}
 		}
@@ -191,7 +219,7 @@ namespace PatrickMcDougle_CTL_Star
 			{
 				Width = TheCanvas.Width,
 				Height = TheCanvas.Height,
-				Fill = new SolidColorBrush(Color.FromRgb(10, 10, 10))
+				Fill = _backgroundColorBrushes[0]
 			};
 
 			TheCanvas.Children.Add(myBackground);
@@ -200,7 +228,7 @@ namespace PatrickMcDougle_CTL_Star
 			DrawCircleOnCanvas(canvasHorizontalCenter - circleRadius,
 				canvasVerticleCenter - circleRadius,
 				circleDiamater,
-				Brushes.White, Brushes.Blue, 5);
+				_backgroundColorBrushes[1], _backgroundColorBrushes[2], 5);
 
 			var angleDelta = (Math.PI + Math.PI) / ctlpData.States.Count;
 			var angle = 0.0;
@@ -211,17 +239,27 @@ namespace PatrickMcDougle_CTL_Star
 				var x = canvasHorizontalCenter + circleRadius * Math.Cos(angle);
 				var y = canvasVerticleCenter + circleRadius * Math.Sin(angle);
 
+				// give the initial state an extra circle around it.
+				var initState = _viewModel.GetInitialState();
+				if (!string.IsNullOrWhiteSpace(initState) && item.Equals(initState))
+				{
+					DrawCircleOnCanvas(x - _stateCircleRadius - 10,
+						y - _stateCircleRadius - 10,
+						_stateCircleDiamater + 20,
+						_stateCircleColorBrushes[2], _stateCircleColorBrushes[3], 5);
+				}
+
 				DrawCircleOnCanvas(x - _stateCircleRadius,
 					y - _stateCircleRadius,
 					_stateCircleDiamater,
-					Brushes.Yellow, Brushes.Green, 5);
+					_stateCircleColorBrushes[0], _stateCircleColorBrushes[1], 5);
 
 				// state name
 				TextBlock textBlock = new TextBlock()
 				{
 					Text = item,
-					Foreground = Brushes.Black,
-					Background = Brushes.Wheat,
+					Foreground = _stateTextColorBrushes[0],
+					Background = _stateTextColorBrushes[1],
 					FontSize = 16.0
 				};
 
@@ -236,8 +274,8 @@ namespace PatrickMcDougle_CTL_Star
 					textBlock = new TextBlock()
 					{
 						Text = string.Join(",", ctlpData.LabelingFunctions.First(f => f.State.Equals(item)).Propositions.ToArray()),
-						Foreground = Brushes.Black,
-						Background = Brushes.Wheat,
+						Foreground = _stateTextColorBrushes[0],
+						Background = _stateTextColorBrushes[1],
 						FontSize = 16.0,
 						FontFamily = new FontFamily("Anonymous Pro")
 					};
@@ -269,7 +307,7 @@ namespace PatrickMcDougle_CTL_Star
 						Y1 = canvasVerticleCenter + circleRadius * Math.Sin(angleDelta * startIndex),
 						X2 = canvasHorizontalCenter + circleRadius * Math.Cos(angleDelta * finishIndex),
 						Y2 = canvasVerticleCenter + circleRadius * Math.Sin(angleDelta * finishIndex),
-						Stroke = Brushes.White,
+						Stroke = _edgeLineColorBrushes[1],
 						StrokeThickness = 7
 					};
 
@@ -316,7 +354,7 @@ namespace PatrickMcDougle_CTL_Star
 						Y1 = lineBase.Y1,
 						X2 = lineBase.X2,
 						Y2 = lineBase.Y2,
-						Stroke = Brushes.Black,
+						Stroke = _edgeLineColorBrushes[0],
 						StrokeThickness = 3
 					});
 
@@ -325,7 +363,7 @@ namespace PatrickMcDougle_CTL_Star
 					DrawCircleOnCanvas(lineBase.X2 - 7,
 						lineBase.Y2 - 7,
 						14,
-						Brushes.Black, Brushes.White, 2);
+						_edgeLineColorBrushes[0], _edgeLineColorBrushes[1], 2);
 				}
 			}
 		}

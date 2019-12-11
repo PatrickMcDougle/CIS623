@@ -190,20 +190,6 @@ namespace PatrickMcDougle_CTL_Star
 			}
 		}
 
-		public string WritePath
-		{
-			get
-			{
-				if (Model != null && Model.Path != null)
-				{
-					// \u03c0 is lowercase PI
-					return "\u03C0 = " + string.Join("->", Model.Path.ToArray());
-				}
-
-				return string.Empty;
-			}
-		}
-
 		public string WriteStates
 		{
 			get
@@ -315,7 +301,39 @@ namespace PatrickMcDougle_CTL_Star
 			}
 		}
 
-		public void InitialState(string initialState)
+		public string GetInitialState()
+		{
+			if (Model != null)
+			{
+				return Model.InitialState;
+			}
+			return string.Empty;
+		}
+
+		public void LoadModel(CtlpData ctlpData)
+		{
+			Model = ctlpData;
+
+			OnPropertyChange(nameof(States));
+			OnPropertyChange(nameof(WriteStates));
+			OnPropertyChange(nameof(WriteBinaryRelations));
+			OnPropertyChange(nameof(WriteLabelingFunctions));
+			OnPropertyChange(nameof(WriteCtlFormula));
+			OnPropertyChange(nameof(WriteCtlStates));
+			OnPropertyChange(nameof(WriteCtlTruth));
+			OnPropertyChange(nameof(LabelCtlTruth));
+		}
+
+		public void LoadModelInfo(ModelInformation modelInformation)
+		{
+			_modelInformation = modelInformation;
+			OnPropertyChange(nameof(WriteCtlFormula));
+			OnPropertyChange(nameof(WriteCtlStates));
+			OnPropertyChange(nameof(WriteCtlTruth));
+			OnPropertyChange(nameof(LabelCtlTruth));
+		}
+
+		public void UpdateInitialState(string initialState)
 		{
 			if (string.IsNullOrWhiteSpace(initialState))
 			{
@@ -330,30 +348,6 @@ namespace PatrickMcDougle_CTL_Star
 				Model.InitialState = string.Empty;
 			}
 			OnPropertyChange(nameof(WriteStates));
-			OnPropertyChange(nameof(WriteCtlTruth));
-			OnPropertyChange(nameof(LabelCtlTruth));
-		}
-
-		public void LoadModel(CtlpData ctlpData)
-		{
-			Model = ctlpData;
-
-			OnPropertyChange(nameof(States));
-			OnPropertyChange(nameof(WriteStates));
-			OnPropertyChange(nameof(WriteBinaryRelations));
-			OnPropertyChange(nameof(WriteLabelingFunctions));
-			OnPropertyChange(nameof(WritePath));
-			OnPropertyChange(nameof(WriteCtlFormula));
-			OnPropertyChange(nameof(WriteCtlStates));
-			OnPropertyChange(nameof(WriteCtlTruth));
-			OnPropertyChange(nameof(LabelCtlTruth));
-		}
-
-		public void LoadModelInfo(ModelInformation modelInformation)
-		{
-			_modelInformation = modelInformation;
-			OnPropertyChange(nameof(WriteCtlFormula));
-			OnPropertyChange(nameof(WriteCtlStates));
 			OnPropertyChange(nameof(WriteCtlTruth));
 			OnPropertyChange(nameof(LabelCtlTruth));
 		}

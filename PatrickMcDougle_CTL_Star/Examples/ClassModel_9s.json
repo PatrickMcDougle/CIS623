@@ -22,16 +22,6 @@
 		"c1"
 	],
 
-	"Path": [
-		"s0",
-		"s1",
-		"s0",
-		"s1",
-		"s0",
-		"s1",
-		"s2"
-	],
-
 	"BinaryRelations": [
 		{
 			"Start": "s0",
