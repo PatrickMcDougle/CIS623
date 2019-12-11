@@ -28,8 +28,8 @@
 			<Run Name="TheCurrentSolutionP3"></Run>
 			<Run Name="TheCurrentSolutionDone" Background="#55FF55" Foreground="#000000"></Run>
 		</TextBlock>
-		<ComboBox Name="TheCtlFormula" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="1" SelectionChanged="TheCtlFormula_SelectionChanged">
-			<Label>Formulas</Label>
+		<ComboBox Name="TheCtlFormula" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="1" SelectionChanged="TheCtlFormula_SelectionChanged" HorizontalAlignment="Left" Width="264">
+			<Label Style="{StaticResource DropDown}">Formulas</Label>
 			<ComboBoxItem>AF</ComboBoxItem>
 			<ComboBoxItem>EF</ComboBoxItem>
 			<ComboBoxItem>AG</ComboBoxItem>
@@ -38,13 +38,13 @@
 			<ComboBoxItem>EU</ComboBoxItem>
 			<ComboBoxItem>AX</ComboBoxItem>
 			<ComboBoxItem>EX</ComboBoxItem>
-			<Label>Logics</Label>
+			<Label Style="{StaticResource DropDown}">Logics</Label>
 			<ComboBoxItem>∧ - Conjuncation</ComboBoxItem>
 			<ComboBoxItem>∨ - Disjuncation</ComboBoxItem>
 			<ComboBoxItem>⊕ - Exclusive</ComboBoxItem>
 			<ComboBoxItem>→ - Implication</ComboBoxItem>
 			<ComboBoxItem>¬ - Negation</ComboBoxItem>
-			<Label>Leafs</Label>
+			<Label Style="{StaticResource DropDown}">Leafs</Label>
 			<ComboBoxItem>⊤ - Tautology</ComboBoxItem>
 			<ComboBoxItem>⊥ - Contradiction</ComboBoxItem>
 			<ComboBoxItem>Proposition</ComboBoxItem>

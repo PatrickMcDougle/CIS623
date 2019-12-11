@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:PatrickMcDougle_CTL_Star"
         mc:Ignorable="d"
 		Background="Black"
+		FocusManager.FocusedElement="{Binding ElementName=StateName}"
         Title="Add a State" Height="250" Width="400">
-    <Grid>
+	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="1*" />
 			<ColumnDefinition Width="1*" />
