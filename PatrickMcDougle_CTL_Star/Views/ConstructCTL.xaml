@@ -22,12 +22,16 @@
 			<RowDefinition Height="3*" />
 		</Grid.RowDefinitions>
 
-		<TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Style="{StaticResource TextBlock}" Name="TheCurrentSolution">
-			<Run Name="TheCurrentSolutionP1"></Run>
-			<Run Name="TheCurrentSolutionP2" Background="#555500"></Run>
-			<Run Name="TheCurrentSolutionP3"></Run>
-			<Run Name="TheCurrentSolutionDone" Background="#55FF55" Foreground="#000000"></Run>
-		</TextBlock>
+		<Border Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+			<Viewbox Margin="0" Stretch="Uniform">
+				<TextBlock Style="{StaticResource TextBlock}" Name="TheCurrentSolution">
+					<Run Name="TheCurrentSolutionP1">
+					</Run><Run Name="TheCurrentSolutionP2" Background="#555500">
+					</Run><Run Name="TheCurrentSolutionP3">
+					</Run><Run Name="TheCurrentSolutionDone" Background="#55FF55" Foreground="#000000"></Run>
+				</TextBlock>
+			</Viewbox>
+		</Border>
 		<ComboBox Name="TheCtlFormula" Grid.Column="0" Grid.ColumnSpan="1" Grid.Row="1" SelectionChanged="TheCtlFormula_SelectionChanged" HorizontalAlignment="Left" Width="264">
 			<Label Style="{StaticResource DropDown}">Formulas</Label>
 			<ComboBoxItem>AF</ComboBoxItem>
